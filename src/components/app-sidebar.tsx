@@ -1,13 +1,13 @@
 import { Tags, Home, LayoutGrid, Archive, Info } from "lucide-react";
 import Image from "next/image";
-import logoImage from "../../public/imagenes/logo/logo_1.webp";
+import Link from "next/link";
+import logoImage from "../../public/imagenes/logo/logo_2.webp";
 
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarGroup,
 	SidebarGroupContent,
-	SidebarGroupLabel,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
@@ -44,32 +44,37 @@ const items = [
 
 export function AppSidebar() {
 	return (
-		<Sidebar className="py-7 px-4">
+		<Sidebar className="bg-[#1e1e1e] py-7 px-4">
 			<SidebarContent>
 				<SidebarGroup>
-					<div className="space-y-4">
-						<div className="border-2 border-gray-300 bg-slate-700 flex items-center justify-center w-28 h-28 rounded-full">
-							<Image
-								src={logoImage}
-								alt="Logo"
-								width={50}
-								height={50}
-							/>
+					<div className="space-y-4 pl-4">
+						<div className="border-2 border-neutral-600 bg-neutral-950 flex items-center justify-center w-28 h-28 rounded-full">
+							<Link href="/">
+								<Image
+									src={logoImage}
+									alt="Logo"
+									// width={50}
+									// height={50}
+									className="w-[60px] h-[60px] overflow-hidden opacity-80 hover:opacity-100 hover:scale-120 transform transition-transform duration-300 ease-in-out"
+								/>
+							</Link>
 						</div>
-						<h1 className="font-bold text-3xl">Denis</h1>
+						<h1 className="font-bold tracking-wider text-3xl text-neutral-600">
+							Denis
+						</h1>
 					</div>
-					<SidebarGroupContent className="mt-8">
+					<SidebarGroupContent className="mt-8 text-neutral-500 font-semibold">
 						<SidebarMenu>
 							{items.map((item) => (
-								<SidebarMenuItem
-									key={item.title}
-									className="p-2">
+								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton
 										asChild
-										className="hover:bg-slate-100 hover:text-slate-500">
-										<a href={item.url}>
+										className="hover:bg-neutral-800 transition-colors duration-300 ease-in-out">
+										<a
+											href={item.url}
+											className="h-[40px]">
 											<item.icon />
-											<span className="uppercase font-semibold">
+											<span className="uppercase font-semibold ml-2">
 												{item.title}
 											</span>
 										</a>
