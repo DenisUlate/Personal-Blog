@@ -71,7 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<body>
 				<SidebarProvider>
 					<AppSidebar />
-					<main>
+					<main className="bg-[#1b1b1e] min-h-screen w-full">
 						<SidebarTrigger />
 						{children}
 					</main>
