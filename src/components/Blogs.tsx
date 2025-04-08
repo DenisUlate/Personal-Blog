@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "./ui/badge";
 import { BarLoader } from "react-spinners";
 import { Calendar } from "lucide-react";
+import Link from "next/link";
 
 // Updated interface to match the actual API response
 interface BlogPost {
@@ -77,21 +78,23 @@ const Blogs: React.FC = () => {
 			<h1 className="text-3xl font-bold text-neutral-400 mb-8">Blog Posts</h1>
 			<div className="space-y-8">
 				{posts.map((post) => (
-					<article key={post.id} className="border p-6 rounded-lg shadow-sm bg-[#1e1e1e]">
-						<h2 className="text-2xl text-neutral-300 font-semibold mb-2">{post.title}</h2>
-						<div className="flex items-center space-x-2 text-gray-500 mb-4">
-							<Calendar size={16} />
-							<span>{formatDate()}</span>
-						</div>
-						<p className="mb-4 text-neutral-400">{post.body}</p>
-						<div className="flex gap-2 mb-2">
-							{post.tags.map((tag, index) => (
-								<Badge variant="default" key={index} className="bg-neutral-700 px-2 py-1 rounded-md text-sm">
-									#{tag}
-								</Badge>
-							))}
-						</div>
-					</article>
+					<div key={post.id} className="border p-6 rounded-lg shadow-sm bg-[#1e1e1e]">
+						<Link href={`/blog/${post.id}`} className="flex flex-col">
+							<h2 className="text-2xl text-neutral-300 font-semibold mb-2">{post.title}</h2>
+							<div className="flex items-center space-x-2 text-gray-500 mb-4">
+								<Calendar size={16} />
+								<span>{formatDate()}</span>
+							</div>
+							<p className="mb-4 text-neutral-400">{post.body}</p>
+							<div className="flex gap-2 mb-2">
+								{post.tags.map((tag, index) => (
+									<Badge variant="default" key={index} className="bg-neutral-700 px-2 py-1 rounded-md text-sm">
+										#{tag}
+									</Badge>
+								))}
+							</div>
+						</Link>
+					</div>
 				))}
 			</div>
 		</div>

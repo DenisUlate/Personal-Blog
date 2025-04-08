@@ -1,7 +1,7 @@
 import { Tags, Home, LayoutGrid, Archive, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import logoImage from "../../public/imagenes/logo/logo_2.webp";
+import logoImage from "../../../public/assets/logo_2.webp";
 
 import {
 	Sidebar,
@@ -59,9 +59,7 @@ export function AppSidebar() {
 								/>
 							</Link>
 						</div>
-						<h1 className="font-bold tracking-wider text-3xl text-neutral-600">
-							Denis
-						</h1>
+						<h1 className="font-bold tracking-wider text-3xl text-neutral-600">Denis</h1>
 					</div>
 					<SidebarGroupContent className="mt-8 text-neutral-500 font-semibold">
 						<SidebarMenu>
@@ -70,13 +68,9 @@ export function AppSidebar() {
 									<SidebarMenuButton
 										asChild
 										className="hover:bg-neutral-800 transition-colors duration-300 ease-in-out">
-										<a
-											href={item.url}
-											className="h-[40px]">
+										<a href={item.url} className="h-[40px]">
 											<item.icon />
-											<span className="uppercase font-semibold ml-2">
-												{item.title}
-											</span>
+											<span className="uppercase font-semibold ml-2">{item.title}</span>
 										</a>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
