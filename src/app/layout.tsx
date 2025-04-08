@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../styles/globals.css";
 import localFont from "next/font/local";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 
 // Configure the local fonts
 const poppins = localFont({
@@ -65,9 +65,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html
-			lang="en"
-			className={`${poppins.variable} ${sourceCodePro.variable}`}>
+		<html lang="en" className={`${poppins.variable} ${sourceCodePro.variable}`}>
 			<body>
 				<SidebarProvider>
 					<AppSidebar />
