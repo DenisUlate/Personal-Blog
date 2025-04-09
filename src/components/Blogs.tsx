@@ -5,6 +5,7 @@ import { Badge } from "./ui/badge";
 import { BarLoader } from "react-spinners";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
+import Pagination from "./Pagination";
 
 // Updated interface to match the actual API response
 interface BlogPost {
@@ -26,6 +27,10 @@ const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
+	const [currentPage, setCurrentPage] = useState<number>(1);
+
+	const postsPerPage = 10;
+	const totalPages = Math.ceil(posts.length / postsPerPage);
 
 	useEffect(() => {
 		const fetchBlogs = async () => {
@@ -49,6 +54,10 @@ const Blogs: React.FC = () => {
 
 		fetchBlogs();
 	}, []);
+
+	// Calcular las publicaciones visibles para la página actual
+	const startIndex = (currentPage - 1) * postsPerPage;
+	const currentPosts = posts.slice(startIndex, startIndex + postsPerPage);
 
 	// Function to format the current date
 	const formatDate = () => {
@@ -77,7 +86,7 @@ const Blogs: React.FC = () => {
 		<div className="w-full h-full p-8">
 			<h1 className="text-3xl font-bold text-neutral-400 mb-8">Blog Posts</h1>
 			<div className="space-y-8">
-				{posts.map((post) => (
+				{currentPosts.map((post) => (
 					<div key={post.id} className="border p-6 rounded-lg shadow-sm bg-[#1e1e1e]">
 						<Link href={`/blog/${post.id}`} className="flex flex-col">
 							<h2 className="text-2xl text-neutral-300 font-semibold mb-2">{post.title}</h2>
@@ -96,6 +105,10 @@ const Blogs: React.FC = () => {
 						</Link>
 					</div>
 				))}
+			</div>
+			{/* Componente de paginación */}
+			<div className="my-8">
+				<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
 			</div>
 		</div>
 	);
