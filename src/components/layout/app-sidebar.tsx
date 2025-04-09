@@ -37,7 +37,7 @@ const items = [
 	},
 	{
 		title: "About",
-		url: "#",
+		url: "/about",
 		icon: Info,
 	},
 ];
@@ -68,10 +68,10 @@ export function AppSidebar() {
 									<SidebarMenuButton
 										asChild
 										className="hover:bg-neutral-800 transition-colors duration-300 ease-in-out">
-										<a href={item.url} className="h-[40px]">
+										<Link href={item.url} className="h-[40px] flex items-center">
 											<item.icon />
 											<span className="uppercase font-semibold ml-2">{item.title}</span>
-										</a>
+										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
