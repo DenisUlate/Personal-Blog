@@ -3,12 +3,12 @@
 import {
 	Pagination as PaginationRoot,
 	PaginationContent,
-	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+import { cn } from "@/lib/utils";
 
 interface PaginationProps {
 	currentPage: number;
@@ -23,15 +23,21 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 		}
 	};
 
+	// Disable the previous button on the first page
+	// Disable the next button on the last page
+	const isFirstPage = currentPage === 1;
+	const isLastPage = currentPage === totalPages;
+
 	return (
 		<PaginationRoot>
 			<PaginationContent>
 				<PaginationItem>
 					<PaginationPrevious
 						href="#"
+						className={cn(isFirstPage && "pointer-events-none opacity-50")}
 						onClick={(e) => {
 							e.preventDefault();
-							handlePageChange(currentPage - 1);
+							if (!isFirstPage) handlePageChange(currentPage - 1);
 						}}
 					/>
 				</PaginationItem>
@@ -51,9 +57,10 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 				<PaginationItem>
 					<PaginationNext
 						href="#"
+						className={cn(isLastPage && "pointer-events-none opacity-50")}
 						onClick={(e) => {
 							e.preventDefault();
-							handlePageChange(currentPage + 1);
+							if (!isLastPage) handlePageChange(currentPage + 1);
 						}}
 					/>
 				</PaginationItem>

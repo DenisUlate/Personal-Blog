@@ -11,7 +11,7 @@ function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
 			role="navigation"
 			aria-label="pagination"
 			data-slot="pagination"
-			className={cn("mx-auto flex w-full justify-center", className)}
+			className={cn("mx-auto flex w-full justify-center text-white", className)}
 			{...props}
 		/>
 	);
@@ -38,8 +38,9 @@ function PaginationLink({ className, isActive, size = "icon", ...props }: Pagina
 			data-active={isActive}
 			className={cn(
 				buttonVariants({
-					variant: isActive ? "outline" : "ghost",
+					variant: isActive ? "linkSecondary" : "ghost",
 					size,
+					className: "text-neutral-300",
 				}),
 				className
 			)}
