@@ -1,7 +1,7 @@
 import { Tags, Home, LayoutGrid, Archive, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import logoImage from "../../../public/assets/logo_2.webp";
+import logoImage from "../../../public/assets/logo_3_optimized.png";
 
 import {
 	Sidebar,
@@ -55,7 +55,7 @@ export function AppSidebar() {
 									alt="Logo"
 									// width={50}
 									// height={50}
-									className="w-[60px] h-[60px] overflow-hidden opacity-80 hover:opacity-100 hover:scale-120 transform transition-transform duration-300 ease-in-out"
+									className="w-[90px] h-[90px] overflow-hidden opacity-80 hover:opacity-100 hover:scale-120 transform transition-transform duration-300 ease-in-out"
 								/>
 							</Link>
 						</div>
