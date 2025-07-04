@@ -6,22 +6,7 @@ import { BarLoader } from "react-spinners";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import Pagination from "./Pagination";
-
-// Updated interface to match the actual API response
-interface BlogPost {
-	id: number;
-	title: string;
-	body: string;
-	userId: number;
-	tags: string[];
-}
-
-interface BlogsResponse {
-	posts: BlogPost[];
-	total: number;
-	skip: number;
-	limit: number;
-}
+import { BlogPost, BlogsResponse } from "@/types/blog";
 
 const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -87,7 +72,9 @@ const Blogs: React.FC = () => {
 			<h1 className="text-3xl font-bold text-neutral-400 mb-8">Blog Posts</h1>
 			<div className="space-y-8">
 				{currentPosts.map((post) => (
-					<div key={post.id} className="border p-6 rounded-lg shadow-sm bg-[#1e1e1e]">
+					<div
+						key={post.id}
+						className="border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
 						<Link href={`/blog/${post.id}`} className="flex flex-col">
 							<h2 className="text-2xl text-neutral-300 font-semibold mb-2">{post.title}</h2>
 							<div className="flex items-center space-x-2 text-gray-500 mb-4">
