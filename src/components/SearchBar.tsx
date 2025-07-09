@@ -1,104 +1,69 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { Search, X, Filter, Calendar, Hash, FileText, ChevronDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-
-export interface SearchFilters {
-	query: string;
-	searchIn: ("content" | "title" | "body" | "tags")[];
-	dateRange: {
-		form?: string;
-		to?: string;
-	};
-}
+import React, { useState, useEffect } from "react";
+import { Search, X } from "lucide-react";
+import { Input } from "./ui/input";
 
 interface SearchBarProps {
-	onSearch: (filters: SearchFilters) => void;
-	onClear?: () => void;
+	onSearch: (searchTerm: string) => void;
 	placeholder?: string;
 	className?: string;
-	showAdvancedFilters?: boolean;
-	disabled?: boolean;
 }
-
-const SEARCH_OPTIONS = [
-	{ value: "title", label: "Título", icon: FileText },
-	{ value: "content", label: "Contenido", icon: FileText },
-	{ value: "tags", label: "Tags", icon: Hash },
-] as const;
 
 const SearchBar: React.FC<SearchBarProps> = ({
 	onSearch,
-	onClear,
-	placeholder = "Buscar en el blog...",
-	className,
-	showAdvancedFilters = true,
-	disabled = false,
+	placeholder = "Search blog posts by title...",
+	className = "",
 }) => {
-	const [query, setQuery] = useState("");
-	const [searchIn, setSearchIn] = useState<("title" | "content" | "tags")[]>(["title", "content", "tags"]);
-	const [dateRange, setDateRange] = useState<{ from?: string; to?: string }>({});
-	const [showFilters, setShowFilters] = useState(false);
-	const [isSearching, setIsSearching] = useState(false);
-	const searchRef = useRef<HTMLDivElement>(null);
+	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	// Cerrar filtros cuando se hace clic fuera de ellos
+	// Debounce effect para evitar búsquedas excesivas
 	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-				setShowFilters(false);
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
+		const debounceTimer = setTimeout(() => {
+			onSearch(searchTerm);
+		}, 300); // 300ms de delay
+
 		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
+			clearTimeout(debounceTimer);
 		};
-	}, []);
+	}, [searchTerm, onSearch]);
 
-	// Debounce para búsqueda automática
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			if (query.trim() || dateRange.from || dateRange.to) {
-				handleSearch();
-			}
-		}, 300);
-
-		return () => clearTimeout(timer);
-	}, [query, searchIn, dateRange]);
-
-	const handleSearch = () => {
-		if (disabled) return;
-
-		setIsSearching(true);
-		const filters: SearchFilters = {
-			query: query.trim(),
-			searchIn,
-			dateRange: dateRange.from || dateRange.to ? dateRange : undefined,
-		};
-
-		onSearch(filters);
-		setTimeout(() => setIsSearching(false), 500);
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(e.target.value);
 	};
 
-	const handleClear = () => {
-		setQuery("");
-		setSearchIn(["title", "content", "tags"]);
-		setDateRange({});
-		setShowFilters(false);
-		onClear?.();
+	const clearSearch = () => {
+		setSearchTerm("");
+		onSearch("");
 	};
 
-	const toggleSearchOption = (option: "title" | "content" | "tags") => {
-		setSearchIn((prev) => (prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]));
-	};
+	return (
+		<div className={`relative w-full max-w-md ${className}`}>
+			<div className="relative">
+				{/* Icono de búsqueda */}
+				<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400" size={20} />
 
-	const hasActiveFilters = query.length > 0 || dateRange.from || dateRange.to;
-	const activeFiltersCount = searchIn.length + (dateRange.from || dateRange.to ? 1 : 0);
+				{/* Input de búsqueda */}
+				<Input
+					type="text"
+					value={searchTerm}
+					onChange={handleInputChange}
+					placeholder={placeholder}
+					className="pl-10 pr-10 py-2 w-full bg-card border-neutral-600 text-neutral-300 placeholder-neutral-500 focus:border-neutral-400 focus:ring-1 focus:ring-neutral-400"
+				/>
 
-	return <div>SearchBar</div>;
+				{/* Botón para limpiar búsqueda */}
+				{searchTerm && (
+					<button
+						onClick={clearSearch}
+						className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-neutral-300 transition-colors duration-200"
+						aria-label="Clear search">
+						<X size={16} />
+					</button>
+				)}
+			</div>
+		</div>
+	);
 };
+
 export default SearchBar;
