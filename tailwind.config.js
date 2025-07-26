@@ -8,8 +8,9 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ["var(--font-poppins)"],
-				mono: ["var(--font-source-code-pro)"],
+				sans: ["var(--font-oxanium)", "sans-serif"],
+				serif: ["var(--font-source-code-pro)", "serif"],
+				mono: ["var(--font-source-code-pro)", "monospace"],
 			},
 		},
 	},

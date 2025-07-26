@@ -7,30 +7,30 @@ import { AppSidebar } from "@/components/layout/app-sidebar";
 import { METADATA } from "@/constants";
 
 // Configure the local fonts
-const poppins = localFont({
+const oxanium = localFont({
 	src: [
 		{
-			path: "../../public/fonts/poppins/poppins-v22-latin-300.woff2",
-			weight: "300",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/poppins/poppins-v22-latin-regular.woff2",
+			path: "../../public/fonts/oxanium/oxanium-v19-latin-regular.woff2",
 			weight: "400",
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/poppins/poppins-v22-latin-600.woff2",
+			path: "../../public/fonts/oxanium/oxanium-v19-latin-600.woff2",
 			weight: "600",
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/poppins/poppins-v22-latin-700.woff2",
+			path: "../../public/fonts/oxanium/oxanium-v19-latin-700.woff2",
 			weight: "700",
 			style: "normal",
 		},
+		{
+			path: "../../public/fonts/oxanium/oxanium-v19-latin-800.woff2",
+			weight: "800",
+			style: "normal",
+		},
 	],
-	variable: "--font-poppins",
+	variable: "--font-oxanium",
 });
 
 const sourceCodePro = localFont({
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${poppins.variable} ${sourceCodePro.variable} dark`}>
+		<html lang="en" className={`${oxanium.variable} ${sourceCodePro.variable} dark`}>
 			<body>
 				<SidebarProvider>
 					<AppSidebar />
