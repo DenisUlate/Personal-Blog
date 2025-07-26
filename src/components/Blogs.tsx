@@ -69,7 +69,7 @@ const Blogs: React.FC = () => {
 	if (isLoading) {
 		return (
 			<div className="flex flex-col space-y-6 justify-center items-center h-full">
-				<p className="text-2xl text-neutral-400 font-semibold">Loading Posts</p>
+				<p className="text-2xl text-primary font-semibold">Loading Posts</p>
 				<BarLoader color="#fff" width={120} />
 			</div>
 		);

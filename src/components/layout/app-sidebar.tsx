@@ -44,18 +44,18 @@ const items = [
 
 export function AppSidebar() {
 	return (
-		<Sidebar className="bg-sidebar py-7 px-4">
+		<Sidebar className="bg-sidebar py-7 px-8 border-r-primary">
 			<SidebarContent>
 				<SidebarGroup>
-					<div className="space-y-4 pl-4">
-						<div className="border border-border bg-background flex items-center justify-center w-28 h-28 rounded-full">
+					<div className="space-y-4 pl-2 ">
+						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-full">
 							<Link href="/">
 								<Image
 									src={logoImage}
 									alt="Logo"
 									// width={50}
 									// height={50}
-									className="w-[90px] h-[90px] overflow-hidden opacity-80 hover:opacity-100 hover:scale-120 transform transition-transform duration-300 ease-in-out"
+									className="w-[125px] h-[125px] overflow-hidden opacity-80 hover:opacity-100 hover:scale-120 transform transition-transform duration-300 ease-in-out"
 								/>
 							</Link>
 						</div>
