@@ -44,11 +44,11 @@ const items = [
 
 export function AppSidebar() {
 	return (
-		<Sidebar className="bg-card py-7 px-4">
+		<Sidebar className="bg-sidebar py-7 px-4">
 			<SidebarContent>
 				<SidebarGroup>
 					<div className="space-y-4 pl-4">
-						<div className="border-2 border-neutral-600 bg-neutral-950 flex items-center justify-center w-28 h-28 rounded-full">
+						<div className="border border-border bg-background flex items-center justify-center w-28 h-28 rounded-full">
 							<Link href="/">
 								<Image
 									src={logoImage}
@@ -59,15 +59,13 @@ export function AppSidebar() {
 								/>
 							</Link>
 						</div>
-						<h1 className="font-bold tracking-wider text-3xl text-neutral-600">Denis</h1>
+						<h1 className="font-bold tracking-wider text-3xl text-primary">Denis</h1>
 					</div>
-					<SidebarGroupContent className="mt-8 text-neutral-500 font-semibold">
+					<SidebarGroupContent className="mt-8 text-primary font-semibold">
 						<SidebarMenu>
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton
-										asChild
-										className="hover:bg-neutral-800 transition-colors duration-300 ease-in-out">
+									<SidebarMenuButton asChild className="hover:bg-accent transition-colors duration-300 ease-in-out">
 										<Link href={item.url} className="h-[40px] flex items-center">
 											<item.icon />
 											<span className="uppercase font-semibold ml-2">{item.title}</span>

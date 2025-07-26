@@ -82,31 +82,31 @@ const Blogs: React.FC = () => {
 	return (
 		<div className="max-w-[800px] h-full p-8 mx-auto">
 			<div className="flex justify-between mb-8">
-				<h1 className="text-3xl font-bold text-neutral-400 mb-8">Blog Posts</h1>
+				<h1 className="text-3xl font-bold text-primary mb-8">Blog Posts</h1>
 				<SearchBar onSearch={handleSearch} />
 			</div>
 
 			<div className="space-y-8">
 				{currentPosts.length === 0 && searchTerm ? (
 					<div className="text-center py-12">
-						<p className="text-xl text-neutral-400 mb-2">No posts found</p>
-						<p className="text-neutral-500">Try searching with different keywords</p>
+						<p className="text-xl text-primary mb-2">No posts found</p>
+						<p className="text-primary">Try searching with different keywords</p>
 					</div>
 				) : (
 					currentPosts.map((post) => (
 						<div
 							key={post.id}
-							className="border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
+							className="border border-border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
 							<Link href={`/blog/${post.id}`} className="flex flex-col">
-								<h2 className="text-2xl text-neutral-300 font-semibold mb-2">{post.title}</h2>
-								<div className="flex items-center space-x-2 text-gray-500 mb-4">
+								<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
+								<div className="flex items-center space-x-2 text-muted-foreground mb-4">
 									<Calendar size={16} />
 									<span>{formatDate()}</span>
 								</div>
-								<p className="mb-4 text-neutral-400">{post.body}</p>
+								<p className="mb-4 text-primary">{post.body}</p>
 								<div className="flex gap-2 mb-2">
 									{post.tags.map((tag, index) => (
-										<Badge variant="default" key={index} className="bg-neutral-700 px-2 py-1 rounded-md text-sm">
+										<Badge variant="default" key={index} className=" px-2 py-1 rounded-md text-sm">
 											#{tag}
 										</Badge>
 									))}
