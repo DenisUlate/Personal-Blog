@@ -8,6 +8,7 @@ import Link from "next/link";
 import Pagination from "./Pagination";
 import { BlogPost, BlogsResponse } from "@/types/blog";
 import SearchBar from "./SearchBar";
+import RecentBlogs from "./RecentBlogs";
 
 const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -80,45 +81,58 @@ const Blogs: React.FC = () => {
 	}
 
 	return (
-		<div className="max-w-[800px] h-full p-8 mx-auto">
+		<div className="max-w-7xl h-full p-8 mx-auto">
+			{/* Header */}
 			<div className="flex justify-between mb-8">
 				<h1 className="text-3xl font-bold text-primary mb-8">Blog Posts</h1>
-				<SearchBar onSearch={handleSearch} />
+				<SearchBar onSearch={handleSearch} className="max-w-sm" />
 			</div>
 
-			<div className="space-y-8">
-				{currentPosts.length === 0 && searchTerm ? (
-					<div className="text-center py-12">
-						<p className="text-xl text-primary mb-2">No posts found</p>
-						<p className="text-primary">Try searching with different keywords</p>
+			{/* Layout de dos columnas */}
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				{/* Columna principal - Posts */}
+				<div className="lg:col-span-2">
+					<div className="space-y-8">
+						{currentPosts.length === 0 && searchTerm ? (
+							<div className="text-center py-12">
+								<p className="text-xl text-primary mb-2">No posts found</p>
+								<p className="text-primary">Try searching with different keywords</p>
+							</div>
+						) : (
+							currentPosts.map((post) => (
+								<div
+									key={post.id}
+									className="border border-border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
+									<Link href={`/blog/${post.id}`} className="flex flex-col">
+										<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
+										<div className="flex items-center space-x-2 text-muted-foreground mb-4">
+											<Calendar size={16} />
+											<span>{formatDate()}</span>
+										</div>
+										<p className="mb-4 text-primary">{post.body}</p>
+										<div className="flex gap-2 mb-2">
+											{post.tags.map((tag, index) => (
+												<Badge variant="default" key={index} className=" px-2 py-1 rounded-md text-sm">
+													#{tag}
+												</Badge>
+											))}
+										</div>
+									</Link>
+								</div>
+							))
+						)}
 					</div>
-				) : (
-					currentPosts.map((post) => (
-						<div
-							key={post.id}
-							className="border border-border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
-							<Link href={`/blog/${post.id}`} className="flex flex-col">
-								<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
-								<div className="flex items-center space-x-2 text-muted-foreground mb-4">
-									<Calendar size={16} />
-									<span>{formatDate()}</span>
-								</div>
-								<p className="mb-4 text-primary">{post.body}</p>
-								<div className="flex gap-2 mb-2">
-									{post.tags.map((tag, index) => (
-										<Badge variant="default" key={index} className=" px-2 py-1 rounded-md text-sm">
-											#{tag}
-										</Badge>
-									))}
-								</div>
-							</Link>
-						</div>
-					))
-				)}
-			</div>
-			{/* Componente de paginación */}
-			<div className="my-8">
-				<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+
+					{/* Componente de paginación */}
+					<div className="my-8">
+						<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+					</div>
+				</div>
+
+				{/* Sidebar - Posts recientes */}
+				<div className="lg:col-span-1">
+					<RecentBlogs posts={posts} limit={5} />
+				</div>
 			</div>
 		</div>
 	);

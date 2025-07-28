@@ -53,7 +53,7 @@
 }
 
 .dark {
-	--background: oklch(0.2178 0 0);
+	--background: oklch(19.125% 0.00002 271.152);
 	--foreground: oklch(0.8853 0 0);
 	--card: oklch(0.2435 0 0);
 	--card-foreground: oklch(0.8853 0 0);
@@ -150,4 +150,13 @@
 	--shadow-lg: var(--shadow-lg);
 	--shadow-xl: var(--shadow-xl);
 	--shadow-2xl: var(--shadow-2xl);
+}
+
+/* Sidebar custom border styles */
+.sidebar-border-right {
+	border-right: 1px solid hsl(var(--sidebar-border)) !important;
+}
+
+.sidebar-border-left {
+	border-left: 1px solid hsl(var(--sidebar-border)) !important;
 }
