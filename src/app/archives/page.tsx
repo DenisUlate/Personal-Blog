@@ -1,8 +1,10 @@
+import MainLayout from "@/components/layout/MainLayout";
+
 const page = () => {
 	return (
-		<div>
-			<h1 className="text-3xl font-bold text-neutral-300">Archives page</h1>
-		</div>
+		<MainLayout pageTitle="Archives">
+			<p className="text-neutral-400">Browse through archived blog posts.</p>
+		</MainLayout>
 	);
 };
 export default page;

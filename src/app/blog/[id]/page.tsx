@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, use } from "react";
 import { BarLoader } from "react-spinners";
+import MainLayout from "@/components/layout/MainLayout";
 
 interface BlogPost {
 	id: number;
@@ -71,7 +72,7 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 	}
 
 	return (
-		<div className="max-w-4xl mx-auto p-8">
+		<MainLayout showSidebar={false}>
 			<Link href="/" className="flex items-center gap-2 text-neutral-400 hover:text-neutral-200 mb-6">
 				<ArrowLeft size={16} className="text-neutral-400" />
 				<span>Back to all posts</span>
@@ -95,6 +96,6 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 					))}
 				</div>
 			</article>
-		</div>
+		</MainLayout>
 	);
 }

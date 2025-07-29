@@ -1,8 +1,10 @@
+import MainLayout from "@/components/layout/MainLayout";
+
 const page = () => {
 	return (
-		<div>
-			<h1 className="text-3xl font-bold text-neutral-300">Tags</h1>
-		</div>
+		<MainLayout pageTitle="Tags">
+			<p className="text-neutral-400">Explore blog posts by tags.</p>
+		</MainLayout>
 	);
 };
 export default page;
