@@ -73,24 +73,24 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 
 	return (
 		<MainLayout showSidebar={false}>
-			<Link href="/" className="flex items-center gap-2 text-neutral-400 hover:text-neutral-200 mb-6">
-				<ArrowLeft size={16} className="text-neutral-400" />
+			<Link href="/" className="flex items-center gap-2 text-primary hover:text-foreground mb-6">
+				<ArrowLeft size={16} className="text-primary" />
 				<span>Back to all posts</span>
 			</Link>
 
-			<article className="bg-[#1e1e1e] border p-8 rounded-lg shadow-lg">
-				<h1 className="text-4xl font-bold text-neutral-200 mb-4">{post.title}</h1>
+			<article className="bg-card border border-border p-8 rounded-lg shadow-lg">
+				<h1 className="text-4xl font-bold text-foreground mb-4">{post.title}</h1>
 
-				<div className="flex items-center space-x-2 text-neutral-400 mb-4">
-					<Calendar size={16} className="text-neutral-400" />
-					<span className="text-neutral-400 ml-2">{formatDate()}</span>
+				<div className="flex items-center space-x-2 text-primary mb-4">
+					<Calendar size={16} className="text-primary" />
+					<span className="text-primary ml-2">{formatDate()}</span>
 				</div>
 
-				<p className="mt-4 text-neutral-300 leading-relaxed">{post.body}</p>
+				<p className="mt-4 text-foreground leading-relaxed">{post.body}</p>
 
 				<div className="flex gap-2">
 					{post.tags.map((tag, index) => (
-						<Badge variant="default" key={index} className="bg-neutral-700 px-2 py-1 rounded-md text-sm">
+						<Badge variant="default" key={index} className="bg-muted px-2 py-1 rounded-md text-sm">
 							#{tag}
 						</Badge>
 					))}
