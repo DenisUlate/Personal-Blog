@@ -23,14 +23,14 @@ const RecentBlogs: React.FC<RecentBlogsProps> = ({ posts, limit = 5 }) => {
 	};
 
 	return (
-		<div className="bg-card border border-border rounded-lg p-6 sticky top-4">
+		<div className="bg-transparent border-l border-border rounded-lg p-6 sticky top-4">
 			<h3 className="text-xl font-semibold text-foreground mb-4">Recent Posts</h3>
 			<div className="space-y-4">
 				{recentPosts.map((post) => (
 					<Link
 						key={post.id}
 						href={`/blog/${post.id}`}
-						className="block group hover:bg-muted p-3 rounded-md transition-colors duration-200">
+						className="block group hover:bg-gradient-to-r from-card to-transparent p-3 rounded-md transition-colors duration-200">
 						<h4 className="text-sm font-medium text-foreground group-hover:text-primary line-clamp-2 mb-2">
 							{post.title}
 						</h4>
