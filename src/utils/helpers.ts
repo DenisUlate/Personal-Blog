@@ -51,3 +51,10 @@ export function calculateReadingTime(text: string): number {
 	const words = text.split(" ").length;
 	return Math.ceil(words / wordsPerMinute);
 }
+
+/**
+ * Obtiene el año actual
+ */
+export function getCurrentYear(): number {
+	return new Date().getFullYear();
+}

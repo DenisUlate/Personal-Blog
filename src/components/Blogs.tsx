@@ -9,6 +9,7 @@ import Pagination from "./Pagination";
 import { BlogPost, BlogsResponse } from "@/types/blog";
 import SearchBar from "./SearchBar";
 import RecentBlogs from "./RecentBlogs";
+import Footer from "./Footer";
 
 const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -103,7 +104,7 @@ const Blogs: React.FC = () => {
 								<div
 									key={post.id}
 									className="border border-border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
-									<Link href={`/blog/${post.id}`} className="flex flex-col">
+									<Link href={`/blog/${post.id}`} className="flex flex-col ">
 										<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
 										<div className="flex items-center space-x-2 text-muted-foreground mb-4">
 											<Calendar size={16} />
@@ -127,6 +128,9 @@ const Blogs: React.FC = () => {
 					<div className="my-8">
 						<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
 					</div>
+
+					{/* Footer */}
+					<Footer />
 				</div>
 
 				{/* Sidebar - Posts recientes */}
