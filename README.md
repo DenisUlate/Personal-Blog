@@ -1,6 +1,6 @@
 # 🚀 Mi Blog Personal
 
-Un blog personal moderno construido con Next.js 15, React 19, TypeScript y Tailwind CSS.
+Un blog personal moderno construido con Next.js 15, React 19, TypeScript y Tailwind CSS. Ahora con soporte para Markdown y MDX para crear contenido rico e interactivo.
 
 ## ✨ Características
 
@@ -13,6 +13,8 @@ Un blog personal moderno construido con Next.js 15, React 19, TypeScript y Tailw
 - 🚀 **App Router** de Next.js
 - 📊 **Paginación** inteligente
 - 🔄 **Loading states** y manejo de errores
+- 📝 **Soporte Markdown/MDX** para contenido rico
+- 🎮 **Componentes interactivos** en posts
 
 ## 🛠️ Stack Tecnológico
 
@@ -22,6 +24,7 @@ Un blog personal moderno construido con Next.js 15, React 19, TypeScript y Tailw
 - **UI Components**: Radix UI
 - **Iconos**: Lucide React
 - **Fuentes**: Poppins & Source Code Pro (optimizadas)
+- **Contenido**: Markdown/MDX con Gray Matter
 
 ## 📁 Estructura del Proyecto
 

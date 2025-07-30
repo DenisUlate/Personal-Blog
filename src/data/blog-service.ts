@@ -1,71 +1,97 @@
-import { API_CONFIG } from "@/constants";
-import { BlogPost, BlogsResponse } from "@/types/blog";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { BlogPost } from "@/types/blog";
 
-export class BlogService {
-	private static readonly baseUrl = API_CONFIG.BASE_URL;
+const postsDirectory = path.join(process.cwd(), "content/blog");
 
-	/**
-	 * Obtiene todos los posts con paginación
-	 */
-	static async getPosts(page: number = 1, limit: number = API_CONFIG.PAGINATION.DEFAULT_LIMIT): Promise<BlogsResponse> {
-		const skip = (page - 1) * limit;
-
-		try {
-			const response = await fetch(`${this.baseUrl}${API_CONFIG.ENDPOINTS.POSTS}?limit=${limit}&skip=${skip}`, {
-				next: { revalidate: 3600 }, // Revalida cada hora
-			});
-
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
-			return await response.json();
-		} catch (error) {
-			console.error("Error fetching posts:", error);
-			throw new Error("Failed to fetch posts");
-		}
+export function getAllPosts(): BlogPost[] {
+	// Verificar si el directorio existe
+	if (!fs.existsSync(postsDirectory)) {
+		return [];
 	}
 
-	/**
-	 * Obtiene un post por ID
-	 */
-	static async getPostById(id: number): Promise<BlogPost> {
-		try {
-			const response = await fetch(`${this.baseUrl}${API_CONFIG.ENDPOINTS.POSTS}/${id}`, {
-				next: { revalidate: 3600 },
-			});
+	const fileNames = fs.readdirSync(postsDirectory);
+	const allPostsData = fileNames
+		.filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
+		.map((fileName) => {
+			const slug = fileName.replace(/\.(md|mdx)$/, "");
+			const fullPath = path.join(postsDirectory, fileName);
+			const fileContents = fs.readFileSync(fullPath, "utf8");
+			const { data, content } = matter(fileContents);
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
+			return {
+				id: slug,
+				slug,
+				content,
+				title: data.title || "Sin título",
+				excerpt: data.excerpt || "",
+				date: data.date || new Date().toISOString(),
+				author: data.author || "Anónimo",
+				tags: data.tags || [],
+				featured: data.featured || false,
+			} as BlogPost;
+		});
+
+	// Ordenar posts por fecha (más recientes primero)
+	return allPostsData.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+}
+
+export function getPostBySlug(slug: string): BlogPost | null {
+	try {
+		const fullPath = path.join(postsDirectory, `${slug}.md`);
+
+		// Intentar con .md primero, luego con .mdx
+		let fileContents: string;
+		if (fs.existsSync(fullPath)) {
+			fileContents = fs.readFileSync(fullPath, "utf8");
+		} else {
+			const mdxPath = path.join(postsDirectory, `${slug}.mdx`);
+			if (fs.existsSync(mdxPath)) {
+				fileContents = fs.readFileSync(mdxPath, "utf8");
+			} else {
+				return null;
 			}
-
-			return await response.json();
-		} catch (error) {
-			console.error("Error fetching post:", error);
-			throw new Error("Failed to fetch post");
 		}
+
+		const { data, content } = matter(fileContents);
+
+		return {
+			id: slug,
+			slug,
+			content,
+			title: data.title || "Sin título",
+			excerpt: data.excerpt || "",
+			date: data.date || new Date().toISOString(),
+			author: data.author || "Anónimo",
+			tags: data.tags || [],
+			featured: data.featured || false,
+		} as BlogPost;
+	} catch (error) {
+		console.error("Error reading post:", error);
+		return null;
 	}
+}
 
-	/**
-	 * Busca posts por término
-	 */
-	static async searchPosts(query: string): Promise<BlogsResponse> {
-		try {
-			const response = await fetch(
-				`${this.baseUrl}${API_CONFIG.ENDPOINTS.POSTS}/search?q=${encodeURIComponent(query)}`,
-				{
-					next: { revalidate: 300 }, // Revalida cada 5 minutos
-				}
-			);
+export function getFeaturedPosts(): BlogPost[] {
+	const allPosts = getAllPosts();
+	return allPosts.filter((post) => post.featured);
+}
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
+export function getPostsByTag(tag: string): BlogPost[] {
+	const allPosts = getAllPosts();
+	return allPosts.filter((post) => post.tags.some((postTag) => postTag.toLowerCase() === tag.toLowerCase()));
+}
 
-			return await response.json();
-		} catch (error) {
-			console.error("Error searching posts:", error);
-			throw new Error("Failed to search posts");
-		}
-	}
+export function getAllTags(): string[] {
+	const allPosts = getAllPosts();
+	const tags = new Set<string>();
+
+	allPosts.forEach((post) => {
+		post.tags.forEach((tag) => tags.add(tag));
+	});
+
+	return Array.from(tags).sort();
 }

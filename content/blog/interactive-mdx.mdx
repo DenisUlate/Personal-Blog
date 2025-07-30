@@ -1,0 +1,51 @@
+---
+title: "Componentes interactivos con MDX"
+date: "2025-01-30"
+author: "Denis Ulate"
+tags: ["mdx", "react", "interactivo"]
+excerpt: "Aprende cómo crear contenido interactivo usando MDX en tu blog"
+featured: true
+---
+
+import { Badge } from "@/components/ui/badge";
+
+# Componentes interactivos con MDX
+
+MDX nos permite combinar Markdown con componentes de React, creando experiencias interactivas únicas.
+
+## ¿Qué es MDX?
+
+MDX es una extensión de Markdown que permite escribir JSX directamente en tus archivos de contenido.
+
+## Ejemplo de componente
+
+Aquí tienes un componente Badge interactivo:
+
+<div style={{ display: "flex", gap: "8px", margin: "16px 0" }}>
+	<Badge variant="default">React</Badge>
+	<Badge variant="default">MDX</Badge>
+	<Badge variant="default">Next.js</Badge>
+</div>
+
+## Código del ejemplo
+
+```jsx
+import { Badge } from "@/components/ui/badge";
+
+<div style={{ display: "flex", gap: "8px" }}>
+	<Badge variant="default">React</Badge>
+	<Badge variant="default">MDX</Badge>
+	<Badge variant="default">Next.js</Badge>
+</div>;
+```
+
+## Ventajas de MDX
+
+- **Flexibilidad**: Combina la simplicidad de Markdown con el poder de React
+- **Interactividad**: Puedes crear demos, gráficos y componentes interactivos
+- **Reutilización**: Los componentes se pueden reutilizar en múltiples posts
+- **Tipado**: Full TypeScript support
+
+## Conclusión
+
+MDX abre un mundo de posibilidades para crear contenido rico e interactivo en tu blog.

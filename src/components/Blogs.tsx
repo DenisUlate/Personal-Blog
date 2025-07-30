@@ -6,7 +6,7 @@ import { BarLoader } from "react-spinners";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import Pagination from "./Pagination";
-import { BlogPost, BlogsResponse } from "@/types/blog";
+import { BlogPost } from "@/types/blog";
 import MainLayout from "./layout/MainLayout";
 
 const Blogs: React.FC = () => {
@@ -33,13 +33,13 @@ const Blogs: React.FC = () => {
 		const fetchBlogs = async () => {
 			try {
 				setIsLoading(true);
-				const response = await fetch("https://dummyjson.com/posts");
-
+				const response = await fetch('/api/posts');
+				
 				if (!response.ok) {
-					throw new Error("Failed to fetch posts");
+					throw new Error('Failed to fetch posts');
 				}
-
-				const data: BlogsResponse = await response.json();
+				
+				const data = await response.json();
 				setPosts(data.posts);
 			} catch (error) {
 				setError(error instanceof Error ? error.message : "An error occurred");
@@ -56,9 +56,9 @@ const Blogs: React.FC = () => {
 	const startIndex = (currentPage - 1) * postsPerPage;
 	const currentPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
-	// Function to format the current date
-	const formatDate = () => {
-		const date = new Date();
+	// Function to format date
+	const formatDate = (dateString: string) => {
+		const date = new Date(dateString);
 		return date.toLocaleDateString("en-US", {
 			year: "numeric",
 			month: "long",
@@ -80,11 +80,7 @@ const Blogs: React.FC = () => {
 	}
 
 	return (
-		<MainLayout 
-			pageTitle="Blog Posts" 
-			showSearchBar={true} 
-			onSearch={handleSearch}
-		>
+		<MainLayout pageTitle="Blog Posts" showSearchBar={true} onSearch={handleSearch}>
 			{/* Posts */}
 			<div className="space-y-8">
 				{currentPosts.length === 0 && searchTerm ? (
@@ -101,9 +97,9 @@ const Blogs: React.FC = () => {
 								<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
 								<div className="flex items-center space-x-2 text-muted-foreground mb-4">
 									<Calendar size={16} />
-									<span>{formatDate()}</span>
+									<span>{formatDate(post.date)}</span>
 								</div>
-								<p className="mb-4 text-primary">{post.body}</p>
+								<p className="mb-4 text-primary">{post.excerpt}</p>
 								<div className="flex gap-2 mb-2">
 									{post.tags.map((tag, index) => (
 										<Badge variant="default" key={index} className=" px-2 py-1 rounded-md text-sm">

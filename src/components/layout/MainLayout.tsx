@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { BlogPost } from "@/types/blog";
-import { BlogService } from "@/data/blog-service";
 import RecentBlogs from "@/components/RecentBlogs";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
@@ -31,8 +30,15 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 		const fetchRecentPosts = async () => {
 			try {
 				setIsLoadingPosts(true);
-				const response = await BlogService.getPosts(1, 5); // Obtener los 5 posts más recientes
-				setRecentPosts(response.posts);
+				const response = await fetch('/api/posts');
+				
+				if (!response.ok) {
+					throw new Error('Failed to fetch posts');
+				}
+				
+				const data = await response.json();
+				// Obtener solo los 5 posts más recientes
+				setRecentPosts(data.posts.slice(0, 5));
 			} catch (error) {
 				console.error("Error fetching recent posts:", error);
 			} finally {

@@ -6,14 +6,8 @@ import Link from "next/link";
 import { useEffect, useState, use } from "react";
 import { BarLoader } from "react-spinners";
 import MainLayout from "@/components/layout/MainLayout";
-
-interface BlogPost {
-	id: number;
-	title: string;
-	body: string;
-	userId: number;
-	tags: string[];
-}
+import MarkdownContent from "@/components/MarkdownContent";
+import { BlogPost } from "@/types/blog";
 
 export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = use(params);
@@ -25,14 +19,14 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 		const fetchPost = async () => {
 			try {
 				setIsLoading(true);
-				const response = await fetch(`https://dummyjson.com/posts/${id}`);
-
+				const response = await fetch(`/api/posts/${id}`);
+				
 				if (!response.ok) {
-					throw new Error("Failed to fetch post");
+					throw new Error("Post not found");
 				}
-
-				const data: BlogPost = await response.json();
-				setPost(data);
+				
+				const postData = await response.json();
+				setPost(postData);
 			} catch (error) {
 				setError(error instanceof Error ? error.message : "An error occurred");
 				console.error("Error fetching post:", error);
@@ -44,9 +38,9 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 		fetchPost();
 	}, [id]);
 
-	// Function to format the current date
-	const formatDate = () => {
-		const date = new Date();
+	// Function to format date
+	const formatDate = (dateString: string) => {
+		const date = new Date(dateString);
 		return date.toLocaleDateString("en-US", {
 			year: "numeric",
 			month: "long",
@@ -81,14 +75,17 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 			<article className="bg-card border border-border p-8 rounded-lg shadow-lg">
 				<h1 className="text-4xl font-bold text-foreground mb-4">{post.title}</h1>
 
-				<div className="flex items-center space-x-2 text-primary mb-4">
+				<div className="flex items-center space-x-2 text-primary mb-6">
 					<Calendar size={16} className="text-primary" />
-					<span className="text-primary ml-2">{formatDate()}</span>
+					<span className="text-primary ml-2">{formatDate(post.date)}</span>
+					<span className="text-muted-foreground">by {post.author}</span>
 				</div>
 
-				<p className="mt-4 text-foreground leading-relaxed">{post.body}</p>
+				<div className="mb-6">
+					<MarkdownContent content={post.content} />
+				</div>
 
-				<div className="flex gap-2">
+				<div className="flex gap-2 pt-6 border-t border-border">
 					{post.tags.map((tag, index) => (
 						<Badge variant="default" key={index} className="bg-muted px-2 py-1 rounded-md text-sm">
 							#{tag}

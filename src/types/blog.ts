@@ -1,23 +1,27 @@
 export interface BlogPost {
-	id: number;
+	id: string;
 	title: string;
-	body: string;
-	userId: number;
+	content: string;
+	excerpt: string;
+	date: string;
+	author: string;
 	tags: string[];
-	reactions?: {
-		likes: number;
-		dislikes: number;
-	};
-	views?: number;
-	createdAt?: string;
-	updatedAt?: string;
+	featured: boolean;
+	slug: string;
+}
+
+export interface BlogMetadata {
+	title: string;
+	date: string;
+	author: string;
+	tags: string[];
+	excerpt: string;
+	featured: boolean;
 }
 
 export interface BlogsResponse {
 	posts: BlogPost[];
 	total: number;
-	skip: number;
-	limit: number;
 }
 
 export interface PaginationProps {
