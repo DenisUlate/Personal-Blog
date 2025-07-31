@@ -30,12 +30,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 		const fetchRecentPosts = async () => {
 			try {
 				setIsLoadingPosts(true);
-				const response = await fetch('/api/posts');
-				
+				const response = await fetch("/api/posts");
+
 				if (!response.ok) {
-					throw new Error('Failed to fetch posts');
+					throw new Error("Failed to fetch posts");
 				}
-				
+
 				const data = await response.json();
 				// Obtener solo los 5 posts más recientes
 				setRecentPosts(data.posts.slice(0, 5));
