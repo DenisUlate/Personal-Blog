@@ -1,4 +1,4 @@
----
+0---
 title: "Configurando un proyecto Next.js con TypeScript"
 date: "2025-01-20"
 author: "Denis Ulate"
