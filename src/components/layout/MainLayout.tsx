@@ -75,7 +75,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 			{(pageTitle || showSearchBar) && (
 				<div className="flex justify-between items-center mb-8">
 					{pageTitle && <h1 className="text-3xl font-bold text-primary">{pageTitle}</h1>}
-					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-sm" />}
+					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-xs" />}
 				</div>
 			)}
 
@@ -84,8 +84,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 				<div className="lg:col-span-2">{children}</div>
 
 				{/* Sidebar - Posts recientes */}
-				<div className="lg:col-span-1">
-					{!isLoadingPosts && recentPosts.length > 0 && <RecentBlogs posts={recentPosts} limit={5} />}
+				<div className="w-full justify-items-end">
+					<div className="w-full lg:col-span-1 lg:max-w-xs">
+						{!isLoadingPosts && recentPosts.length > 0 && <RecentBlogs posts={recentPosts} limit={5} />}
+					</div>
 				</div>
 			</div>
 			<Footer />
