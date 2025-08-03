@@ -12,6 +12,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import SocialLinks from "../SocialLinks";
 
 // Menu items.
 const items = [
@@ -77,6 +78,7 @@ export function AppSidebar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+			<SocialLinks />
 		</Sidebar>
 	);
 }
