@@ -16,17 +16,18 @@ export default function AboutPage() {
 				</div>
 
 				<div className="prose dark:prose-invert max-w-2xl text-muted-foreground">
-					<p className="text-lg">Welcome to my personal blog! I&apos;m Denis, a passionate developer and writer.</p>
+					<p className="text-lg">Welcome to my personal blog! I&apos;m Denis, a passionate developer.</p>
 
 					<p>
 						I created this space to share my thoughts, experiences, and knowledge about technology, programming, and
 						other topics I&apos;m passionate about.
 					</p>
 
-					<h2 className="text-2xl text-primary font-semibold mt-6 mb-3">My Background</h2>
+					<h2 className="text-2xl text-primary font-semibold mt-6 mb-3">About This Space</h2>
 					<p className="">
-						Add your personal background information here. Talk about your education, career path, and anything else
-						you&apos;d like visitors to know about you.
+						This space focuses on practical tech topics and problem-solving. I keep the emphasis on the work rather than
+						personal details, so you&apos;ll mostly find concise notes, tutorials, and ideas that might help in your
+						projects.
 					</p>
 
 					<h2 className="text-2xl text-primary font-semibold mt-6 mb-3">Skills & Interests</h2>
@@ -34,8 +35,6 @@ export default function AboutPage() {
 						<li>Web Development</li>
 						<li>User Interface Design</li>
 						<li>Technical Writing</li>
-						<li>Photography</li>
-						<li>Open Source Contribution</li>
 					</ul>
 				</div>
 			</div>

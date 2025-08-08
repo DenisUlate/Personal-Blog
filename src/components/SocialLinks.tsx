@@ -47,7 +47,7 @@ const SocialLinks = () => {
                     hover:bg-primary 
                     text-foreground 
                     hover:text-primary-foreground 
-                    rounded-full 
+                    rounded-md 
                     transition-colors 
                     duration-200
                 ">

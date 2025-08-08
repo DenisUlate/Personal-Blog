@@ -13,6 +13,7 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import SocialLinks from "../SocialLinks";
+import { Separator } from "../ui/separator";
 
 // Menu items.
 const items = [
@@ -49,7 +50,7 @@ export function AppSidebar() {
 			<SidebarContent>
 				<SidebarGroup>
 					<div className="space-y-4 pl-2 ">
-						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-full">
+						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-md">
 							<Link href="/">
 								<Image
 									src={logoImage}
@@ -62,7 +63,8 @@ export function AppSidebar() {
 						</div>
 						<h1 className="font-bold tracking-wider text-3xl text-primary">Denis</h1>
 					</div>
-					<SidebarGroupContent className="mt-8 text-primary font-semibold">
+					<SidebarGroupContent className="mt-16 text-primary font-semibold">
+						<Separator className="my-8" />
 						<SidebarMenu>
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
@@ -78,6 +80,7 @@ export function AppSidebar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+			<Separator className="my-12" />
 			<SocialLinks />
 		</Sidebar>
 	);
