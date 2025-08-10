@@ -3,6 +3,7 @@ title: "Introducción a React Hooks"
 date: "2025-01-25"
 author: "Denis Ulate"
 tags: ["react", "hooks", "frontend"]
+category: "Frontend"
 excerpt: "Aprende los conceptos básicos de React Hooks y cómo pueden mejorar tus componentes"
 featured: true
 ---

@@ -7,33 +7,31 @@ import { useState } from "react";
 import MainLayout from "@/components/layout/MainLayout";
 
 const Page = () => {
-	// Estado para manejar la categoría seleccionada (para efectos hover)
+	// State for hovered category (hover effects)
 	const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-	// Datos estáticos de categorías (temporal)
+	// Static frontend categories (placeholder data)
 	const categories = [
-		{ name: "TryHackMe", postCount: 65, slug: "tryhackme", color: "blue" },
-		{ name: "Desarrollo Web", postCount: 23, slug: "desarrollo-web", color: "green" },
-		{ name: "Ciberseguridad", postCount: 18, slug: "ciberseguridad", color: "red" },
-		{ name: "DevOps", postCount: 12, slug: "devops", color: "purple" },
-		{ name: "Tutoriales", postCount: 34, slug: "tutoriales", color: "yellow" },
-		{ name: "Herramientas", postCount: 9, slug: "herramientas", color: "indigo" },
+		{ name: "Frontend", postCount: 65, slug: "frontend", color: "blue" },
+		{ name: "Components", postCount: 34, slug: "components", color: "green" },
+		{ name: "Web Development", postCount: 23, slug: "web-development", color: "yellow" },
+		{ name: "Frameworks", postCount: 18, slug: "frameworks", color: "purple" },
+		{ name: "Libraries", postCount: 12, slug: "libraries", color: "indigo" },
+		{ name: "Animations", postCount: 9, slug: "animations", color: "red" },
 	];
 
 	const maxPostCount = Math.max(...categories.map((cat) => cat.postCount));
 
-	// Función para manejar el click en una categoría
+	// Handle category click (analytics hook placeholder)
 	const handleCategoryClick = (categorySlug: string) => {
-		// Esta función podria incluir analytics o logging antes de la navegación
-		console.log(`Navegando a la categoría: ${categorySlug}`);
-		// La navegación real se maneja con el componente Link de Next.js
+		console.log(`Navigating to category: ${categorySlug}`);
 	};
 
-	// Función para formatear el texto del contador
+	// Format post count label
 	const formatPostCount = (count: number): string => {
-		return count === 1 ? `${count} artículo` : `${count} artículos`;
+		return count === 1 ? `${count} article` : `${count} articles`;
 	};
 
-	// Función para calcular el porcentaje de la barra de progreso
+	// Calculate progress bar percentage
 	const calculateProgressPercentage = (count: number): number => {
 		return Math.min((count / maxPostCount) * 100, 100);
 	};
@@ -52,7 +50,7 @@ const Page = () => {
 
 	return (
 		<MainLayout pageTitle="Categories">
-			{/* Descripción de la página */}
+			{/* Page description */}
 			<div className="mb-8">
 				<p className="text-neutral-400 text-lg">
 					Explore the categories of our blog posts. Click on a category to view all related posts.
@@ -103,9 +101,9 @@ const Page = () => {
 				))}
 			</div>
 
-			{/* Estadisticas generales */}
+			{/* General statistics */}
 			<div className="mt-12 p-6 bg-neutral-900 rounded-lg border border-neutral-800">
-				<h2 className="text-xl font-semibold text-neutral-200 mb-4">Resumen General</h2>
+				<h2 className="text-xl font-semibold text-neutral-200 mb-4">Overview</h2>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="text-center">
 						<div className="text-2xl font-bold text-blue-400">{categories.length}</div>
@@ -115,13 +113,13 @@ const Page = () => {
 						<div className="text-2xl font-bold text-green-400">
 							{categories.reduce((total, cat) => total + cat.postCount, 0)}
 						</div>
-						<div className="text-neutral-400 text-sm">Total Artículos</div>
+						<div className="text-neutral-400 text-sm">Total Articles</div>
 					</div>
 					<div className="text-center">
 						<div className="text-2xl font-bold text-purple-400">
 							{Math.round(categories.reduce((total, cat) => total + cat.postCount, 0) / categories.length)}
 						</div>
-						<div className="text-neutral-400 text-sm">Promedio por Categoría</div>
+						<div className="text-neutral-400 text-sm">Average per Category</div>
 					</div>
 				</div>
 			</div>

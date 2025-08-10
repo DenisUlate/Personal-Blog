@@ -6,6 +6,7 @@ export interface BlogPost {
 	date: string;
 	author: string;
 	tags: string[];
+	category?: string;
 	featured: boolean;
 	slug: string;
 }
@@ -15,6 +16,7 @@ export interface BlogMetadata {
 	date: string;
 	author: string;
 	tags: string[];
+	category?: string;
 	excerpt: string;
 	featured: boolean;
 }

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "./ui/badge";
 import { BarLoader } from "react-spinners";
-import { Calendar } from "lucide-react";
+import { Calendar, Folder } from "lucide-react";
 import Link from "next/link";
 import Pagination from "./Pagination";
 import { BlogPost } from "@/types/blog";
@@ -33,12 +33,12 @@ const Blogs: React.FC = () => {
 		const fetchBlogs = async () => {
 			try {
 				setIsLoading(true);
-				const response = await fetch('/api/posts');
-				
+				const response = await fetch("/api/posts");
+
 				if (!response.ok) {
-					throw new Error('Failed to fetch posts');
+					throw new Error("Failed to fetch posts");
 				}
-				
+
 				const data = await response.json();
 				setPosts(data.posts);
 			} catch (error) {
@@ -95,6 +95,16 @@ const Blogs: React.FC = () => {
 							className="border border-border p-6 rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out">
 							<Link href={`/blog/${post.id}`} className="flex flex-col ">
 								<h2 className="text-2xl text-foreground font-semibold mb-2">{post.title}</h2>
+								{post.category && (
+									<div className="mb-3">
+										<Badge
+											variant="default"
+											className="bg-transparent px-2 py-1 rounded-md text-[10px] uppercase tracking-wide inline-flex items-center justify-center gap-1.5 leading-none">
+											<Folder className="size-3" />
+											<span className="mt-px">{post.category}</span>
+										</Badge>
+									</div>
+								)}
 								<div className="flex items-center space-x-2 text-muted-foreground mb-4">
 									<Calendar size={16} />
 									<span>{formatDate(post.date)}</span>

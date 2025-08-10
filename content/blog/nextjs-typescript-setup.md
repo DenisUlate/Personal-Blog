@@ -1,8 +1,9 @@
-0---
+---
 title: "Configurando un proyecto Next.js con TypeScript"
 date: "2025-01-20"
 author: "Denis Ulate"
-tags: ["nextjs", "typescript", "tutorial"]
+tags: ["nextjs", "typescript", "guide"]
+category: "Frameworks"
 excerpt: "Aprende a configurar un proyecto moderno de Next.js con TypeScript desde cero"
 featured: false
 ---

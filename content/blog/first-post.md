@@ -2,7 +2,8 @@
 title: "Mi primer blog post"
 date: "2025-01-15"
 author: "Denis Ulate"
-tags: ["javascript", "nextjs", "desarrollo"]
+tags: ["javascript", "nextjs", "web-development"]
+category: "Frontend"
 excerpt: "Este es mi primer post del blog implementado con Markdown"
 featured: true
 ---

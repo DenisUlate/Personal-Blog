@@ -29,6 +29,7 @@ export function getAllPosts(): BlogPost[] {
 				date: data.date || new Date().toISOString(),
 				author: data.author || "Anónimo",
 				tags: data.tags || [],
+				category: data.category || "General",
 				featured: data.featured || false,
 			} as BlogPost;
 		});
@@ -67,6 +68,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
 			date: data.date || new Date().toISOString(),
 			author: data.author || "Anónimo",
 			tags: data.tags || [],
+			category: data.category || "General",
 			featured: data.featured || false,
 		} as BlogPost;
 	} catch (error) {
