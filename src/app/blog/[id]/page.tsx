@@ -8,6 +8,7 @@ import { BarLoader } from "react-spinners";
 import MainLayout from "@/components/layout/MainLayout";
 import MarkdownContent from "@/components/MarkdownContent";
 import { BlogPost } from "@/types/blog";
+import GoToTopButton from "@/components/GoToTopButton";
 
 export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = use(params);
@@ -104,6 +105,7 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 					))}
 				</div>
 			</article>
+			<GoToTopButton />
 		</MainLayout>
 	);
 }
