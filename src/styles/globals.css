@@ -160,3 +160,7 @@
 .sidebar-border-left {
 	border-left: 1px solid hsl(var(--sidebar-border)) !important;
 }
+
+html {
+	scroll-behavior: smooth;
+}

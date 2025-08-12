@@ -8,6 +8,7 @@ import Link from "next/link";
 import Pagination from "./Pagination";
 import { BlogPost } from "@/types/blog";
 import MainLayout from "./layout/MainLayout";
+import GoToTopButton from "./GoToTopButton";
 
 const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -127,6 +128,7 @@ const Blogs: React.FC = () => {
 			<div className="my-8">
 				<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
 			</div>
+			<GoToTopButton />
 		</MainLayout>
 	);
 };
