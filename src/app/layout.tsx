@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { METADATA } from "@/constants";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 // Configure the local fonts
 const oxanium = localFont({
@@ -104,6 +105,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 					<AppSidebar />
 					<main className="bg-background min-h-screen w-full">
 						<SidebarTrigger />
+						<Breadcrumbs separator="›" className="px-4 py-2" />
 						{children}
 					</main>
 				</SidebarProvider>
