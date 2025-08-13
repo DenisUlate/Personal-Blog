@@ -44,7 +44,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 						<Button
 							variant={currentPage === index + 1 ? "outline" : "ghost"}
 							size="sm"
-							className={cn("h-9 w-9", currentPage === index + 1 && "bg-primary text-primary-foreground")}
+							className={cn("h-9 w-9", currentPage === index + 1 && "bg-background text-primary")}
 							onClick={() => handlePageChange(index + 1)}>
 							{index + 1}
 						</Button>

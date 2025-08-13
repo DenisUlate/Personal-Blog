@@ -30,7 +30,7 @@ const RecentBlogs: React.FC<RecentBlogsProps> = ({ posts, limit = 5 }) => {
 					<Link
 						key={post.id}
 						href={`/blog/${post.id}`}
-						className="block group hover:bg-gradient-to-r from-card to-transparent p-3 rounded-md transition-colors duration-200">
+						className="block group hover:bg-gradient-to-r from-muted to-transparent p-3 rounded-md transition-colors duration-200">
 						<h4 className="text-sm font-medium text-foreground group-hover:text-primary line-clamp-2 mb-2">
 							{post.title}
 						</h4>
