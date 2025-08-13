@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import SocialLinks from "../SocialLinks";
 import { Separator } from "../ui/separator";
+import { ThemeToggle } from "../ThemeToggle";
 
 // Menu items.
 const items = [
@@ -77,6 +78,9 @@ export function AppSidebar() {
 								</SidebarMenuItem>
 							))}
 						</SidebarMenu>
+						<div className="mt-8 ml-2">
+							<ThemeToggle />
+						</div>
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>

@@ -6,6 +6,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { METADATA } from "@/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 // Configure the local fonts
 const oxanium = localFont({
@@ -101,14 +102,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className={`${oxanium.variable} ${sourceCodePro.variable} dark`}>
 			<body>
-				<SidebarProvider>
-					<AppSidebar />
-					<main className="bg-background min-h-screen w-full">
-						<SidebarTrigger />
-						<Breadcrumbs separator="›" className="px-4 py-2" />
-						{children}
-					</main>
-				</SidebarProvider>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					<SidebarProvider>
+						<AppSidebar />
+						<main className="bg-background min-h-screen w-full">
+							<SidebarTrigger />
+							<Breadcrumbs separator="›" className="px-4 py-2" />
+							{children}
+						</main>
+					</SidebarProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
