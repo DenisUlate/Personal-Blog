@@ -1,5 +1,9 @@
 import Blogs from "@/components/Blogs";
 
 export default function Home() {
-	return <Blogs />;
+	return (
+		<div>
+			<Blogs />
+		</div>
+	);
 }

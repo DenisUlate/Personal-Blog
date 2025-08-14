@@ -164,3 +164,27 @@
 html {
 	scroll-behavior: smooth;
 }
+
+/* Blog post image hover effects */
+.blog-image-container {
+	position: relative;
+	overflow: hidden;
+	border-radius: 0.5rem;
+}
+
+.blog-image-container img {
+	transition: transform 0.3s ease-in-out;
+}
+
+.blog-image-container:hover img {
+	transform: scale(1.05);
+}
+
+/* Text truncation utilities */
+.line-clamp-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}

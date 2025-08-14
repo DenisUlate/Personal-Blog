@@ -6,6 +6,7 @@ tags: ["react", "hooks", "frontend"]
 category: "Frontend"
 excerpt: "Aprende los conceptos básicos de React Hooks y cómo pueden mejorar tus componentes"
 featured: true
+illustration: "/images/blog/illustrations/react-hooks-01-illustration.png"
 ---
 
 # Introducción a React Hooks

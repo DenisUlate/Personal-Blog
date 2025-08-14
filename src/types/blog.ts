@@ -9,6 +9,9 @@ export interface BlogPost {
 	category?: string;
 	featured: boolean;
 	slug: string;
+	featuredImage?: string;
+	illustration?: string;
+	images?: string[];
 }
 
 export interface BlogMetadata {
