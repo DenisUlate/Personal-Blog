@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BarLoader } from "react-spinners";
 import Pagination from "./Pagination";
 import { BlogPost } from "@/types/blog";
 import MainLayout from "./layout/MainLayout";
 import GoToTopButton from "./GoToTopButton";
 import BlogCard from "./BlogCard";
+import BlogListSkeleton from "./BlogListSkeleton";
 
 const Blogs: React.FC = () => {
 	const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -57,10 +57,9 @@ const Blogs: React.FC = () => {
 
 	if (isLoading) {
 		return (
-			<div className="flex flex-col space-y-6 justify-center items-center h-full">
-				<p className="text-2xl text-primary font-semibold">Loading Posts</p>
-				<BarLoader color="#fff" width={120} />
-			</div>
+			<MainLayout pageTitle="Blog Posts" showSearchBar={true} onSearch={handleSearch}>
+				<BlogListSkeleton count={postsPerPage} showImage={true} imagePosition="top" size="medium" />
+			</MainLayout>
 		);
 	}
 

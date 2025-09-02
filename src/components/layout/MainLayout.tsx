@@ -86,7 +86,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 				{/* Sidebar - Posts recientes */}
 				<div className="w-full justify-items-end">
 					<div className="w-full lg:col-span-1 lg:max-w-xs">
-						{!isLoadingPosts && recentPosts.length > 0 && <RecentBlogs posts={recentPosts} limit={5} />}
+						<RecentBlogs posts={recentPosts} limit={5} isLoading={isLoadingPosts} />
 					</div>
 				</div>
 			</div>

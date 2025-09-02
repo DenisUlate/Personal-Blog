@@ -3,16 +3,22 @@
 import React from "react";
 import { BlogPost } from "@/types/blog";
 import BlogCard from "./BlogCard";
+import BlogCardSkeleton from "./BlogCardSkeleton";
 
 interface FeaturedBlogSectionProps {
 	posts: BlogPost[];
 	title?: string;
+	isLoading?: boolean;
 }
 
-const FeaturedBlogSection: React.FC<FeaturedBlogSectionProps> = ({ posts, title = "Featured Posts" }) => {
+const FeaturedBlogSection: React.FC<FeaturedBlogSectionProps> = ({
+	posts,
+	title = "Featured Posts",
+	isLoading = false,
+}) => {
 	const featuredPosts = posts.filter((post) => post.featured);
 
-	if (featuredPosts.length === 0) {
+	if (!isLoading && featuredPosts.length === 0) {
 		return null;
 	}
 
@@ -21,20 +27,40 @@ const FeaturedBlogSection: React.FC<FeaturedBlogSectionProps> = ({ posts, title 
 			<h2 className="text-3xl font-bold text-foreground mb-8">{title}</h2>
 
 			<div className="grid gap-8">
-				{/* First featured post - large hero style */}
-				{featuredPosts[0] && (
-					<div className="col-span-full">
-						<BlogCard post={featuredPosts[0]} showImage={true} imagePosition="top" size="large" />
-					</div>
-				)}
+				{isLoading ? (
+					// Show skeleton loading state
+					<>
+						{/* First featured post skeleton - large hero style */}
+						<div className="col-span-full">
+							<BlogCardSkeleton showImage={true} imagePosition="top" size="large" />
+						</div>
 
-				{/* Remaining featured posts - smaller grid */}
-				{featuredPosts.length > 1 && (
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-						{featuredPosts.slice(1, 4).map((post) => (
-							<BlogCard key={post.id} post={post} showImage={true} imagePosition="top" size="small" />
-						))}
-					</div>
+						{/* Remaining featured posts skeletons - smaller grid */}
+						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{Array.from({ length: 3 }).map((_, index) => (
+								<BlogCardSkeleton key={index} showImage={true} imagePosition="top" size="small" />
+							))}
+						</div>
+					</>
+				) : (
+					// Show actual posts
+					<>
+						{/* First featured post - large hero style */}
+						{featuredPosts[0] && (
+							<div className="col-span-full">
+								<BlogCard post={featuredPosts[0]} showImage={true} imagePosition="top" size="large" />
+							</div>
+						)}
+
+						{/* Remaining featured posts - smaller grid */}
+						{featuredPosts.length > 1 && (
+							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+								{featuredPosts.slice(1, 4).map((post) => (
+									<BlogCard key={post.id} post={post} showImage={true} imagePosition="top" size="small" />
+								))}
+							</div>
+						)}
+					</>
 				)}
 			</div>
 		</section>

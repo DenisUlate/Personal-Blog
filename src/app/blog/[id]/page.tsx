@@ -4,11 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Folder } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, use } from "react";
-import { BarLoader } from "react-spinners";
 import MainLayout from "@/components/layout/MainLayout";
 import MarkdownContent from "@/components/MarkdownContent";
 import { BlogPost } from "@/types/blog";
 import GoToTopButton from "@/components/GoToTopButton";
+import BlogPostSkeleton from "@/components/BlogPostSkeleton";
 
 export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = use(params);
@@ -50,12 +50,7 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 	};
 
 	if (isLoading) {
-		return (
-			<div className="flex flex-col space-y-6 justify-center items-center h-screen">
-				<p className="text-2xl text-neutral-400 font-semibold">Loading Post</p>
-				<BarLoader color="#fff" width={120} />
-			</div>
-		);
+		return <BlogPostSkeleton />;
 	}
 
 	if (error) {
