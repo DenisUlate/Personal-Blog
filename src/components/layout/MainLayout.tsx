@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { BlogPost } from "@/types/blog";
 import RecentBlogs from "@/components/RecentBlogs";
 import Footer from "@/components/Footer";
@@ -15,19 +15,13 @@ interface MainLayoutProps {
 	className?: string;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({
-	children,
-	showSidebar = true,
-	showSearchBar = false,
-	pageTitle,
-	onSearch,
-	className = "",
-}) => {
-	const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
-	const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+const MainLayout: React.FC<MainLayoutProps> = React.memo(
+	({ children, showSidebar = true, showSearchBar = false, pageTitle, onSearch, className = "" }) => {
+		const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
+		const [isLoadingPosts, setIsLoadingPosts] = useState(true);
 
-	useEffect(() => {
-		const fetchRecentPosts = async () => {
+		// Memoize the fetch function to avoid recreation on every render
+		const fetchRecentPosts = useCallback(async () => {
 			try {
 				setIsLoadingPosts(true);
 				const response = await fetch("/api/posts");
@@ -37,62 +31,77 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 				}
 
 				const data = await response.json();
-				// Obtener solo los 5 posts más recientes
+				// Get only the 5 most recent posts
 				setRecentPosts(data.posts.slice(0, 5));
 			} catch (error) {
 				console.error("Error fetching recent posts:", error);
 			} finally {
 				setIsLoadingPosts(false);
 			}
-		};
+		}, []);
 
-		if (showSidebar) {
-			fetchRecentPosts();
-		}
-	}, [showSidebar]);
+		useEffect(() => {
+			if (showSidebar) {
+				fetchRecentPosts();
+			}
+		}, [showSidebar, fetchRecentPosts]);
 
-	if (!showSidebar) {
-		// Layout simple sin sidebar
-		return (
-			<div className={`max-w-7xl mx-auto p-8 ${className}`}>
-				{/* Header con título y search bar opcional */}
-				{(pageTitle || showSearchBar) && (
-					<div className="flex justify-between items-center mb-8">
-						{pageTitle && <h1 className="text-3xl font-bold text-primary">{pageTitle}</h1>}
-						{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-sm" />}
-					</div>
-				)}
-				<div className="min-h-screen">{children}</div>
-				<Footer />
-			</div>
-		);
-	}
+		// Memoize header content to avoid recreation
+		const headerContent = useMemo(() => {
+			if (!(pageTitle || showSearchBar)) return null;
 
-	// Layout con sidebar
-	return (
-		<div className={`max-w-7xl mx-auto p-8 ${className}`}>
-			{/* Header con título y search bar opcional */}
-			{(pageTitle || showSearchBar) && (
+			return (
 				<div className="flex justify-between items-center mb-8">
 					{pageTitle && <h1 className="text-3xl font-bold text-primary">{pageTitle}</h1>}
 					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-xs" />}
 				</div>
-			)}
+			);
+		}, [pageTitle, showSearchBar, onSearch]);
 
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-h-screen">
-				{/* Contenido principal */}
-				<div className="lg:col-span-2">{children}</div>
+		// Memoize sidebar content to avoid recreation
+		const sidebarContent = useMemo(() => {
+			if (!showSidebar) return null;
 
-				{/* Sidebar - Posts recientes */}
+			return (
 				<div className="w-full justify-items-end">
 					<div className="w-full lg:col-span-1 lg:max-w-xs">
 						<RecentBlogs posts={recentPosts} limit={5} isLoading={isLoadingPosts} />
 					</div>
 				</div>
+			);
+		}, [showSidebar, recentPosts, isLoadingPosts]);
+
+		if (!showSidebar) {
+			// Layout simple sin sidebar
+			return (
+				<div className={`max-w-7xl mx-auto p-8 ${className}`}>
+					{/* Header with title and optional search bar */}
+					{headerContent}
+					<div className="min-h-screen">{children}</div>
+					<Footer />
+				</div>
+			);
+		}
+
+		// Layout con sidebar
+		return (
+			<div className={`max-w-7xl mx-auto p-8 ${className}`}>
+				{/* Header with title and optional search bar */}
+				{headerContent}
+
+				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-h-screen">
+					{/* Main content */}
+					<div className="lg:col-span-2">{children}</div>
+
+					{/* Sidebar - Recent posts */}
+					{sidebarContent}
+				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
-	);
-};
+		);
+	}
+);
+
+MainLayout.displayName = "MainLayout";
 
 export default MainLayout;

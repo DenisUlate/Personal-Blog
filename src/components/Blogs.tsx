@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import Pagination from "./Pagination";
 import { BlogPost } from "@/types/blog";
 import MainLayout from "./layout/MainLayout";
@@ -17,16 +17,29 @@ const Blogs: React.FC = () => {
 
 	const postsPerPage = 10;
 
-	// Filtrar posts basado en el término de búsqueda
-	const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+	// Memoize filtered posts to avoid recalculation on every render
+	const filteredPosts = useMemo(
+		() => posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase())),
+		[posts, searchTerm]
+	);
 
-	const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+	// Memoize total pages calculation
+	const totalPages = useMemo(
+		() => Math.ceil(filteredPosts.length / postsPerPage),
+		[filteredPosts.length, postsPerPage]
+	);
 
-	// Función para manejar la búsqueda
-	const handleSearch = (term: string) => {
+	// Memoize current posts calculation
+	const currentPosts = useMemo(() => {
+		const startIndex = (currentPage - 1) * postsPerPage;
+		return filteredPosts.slice(startIndex, startIndex + postsPerPage);
+	}, [filteredPosts, currentPage, postsPerPage]);
+
+	// Memoize search handler to avoid recreation on every render
+	const handleSearch = useCallback((term: string) => {
 		setSearchTerm(term);
-		setCurrentPage(1); // Resetear a la primera página cuando se busque
-	};
+		setCurrentPage(1); // Reset to first page when searching
+	}, []);
 
 	useEffect(() => {
 		const fetchBlogs = async () => {
@@ -50,10 +63,6 @@ const Blogs: React.FC = () => {
 
 		fetchBlogs();
 	}, []);
-
-	// Calcular las publicaciones visibles para la página actual
-	const startIndex = (currentPage - 1) * postsPerPage;
-	const currentPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
 	if (isLoading) {
 		return (
