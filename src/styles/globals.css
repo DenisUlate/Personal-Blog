@@ -50,6 +50,17 @@
 	--shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
 	--tracking-normal: 0em;
 	--spacing: 0.25rem;
+
+	/* Fluid Typography System - Responsive font sizes that scale smoothly */
+	--font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); /* 12px -> 14px */
+	--font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem); /* 14px -> 16px */
+	--font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* 16px -> 18px */
+	--font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.375rem); /* 18px -> 22px */
+	--font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem); /* 20px -> 24px */
+	--font-size-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem); /* 24px -> 32px */
+	--font-size-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem); /* 30px -> 40px */
+	--font-size-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem); /* 36px -> 48px */
+	--font-size-5xl: clamp(3rem, 2.25rem + 3.75vw, 4rem); /* 48px -> 64px */
 }
 
 .dark {
@@ -97,6 +108,17 @@
 	--shadow-lg: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 4px 6px -1px hsl(0 0% 20% / 0.15);
 	--shadow-xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 8px 10px -1px hsl(0 0% 20% / 0.15);
 	--shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
+
+	/* Fluid Typography System - Same as light theme for consistency */
+	--font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+	--font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+	--font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+	--font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.375rem);
+	--font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+	--font-size-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+	--font-size-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+	--font-size-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+	--font-size-5xl: clamp(3rem, 2.25rem + 3.75vw, 4rem);
 }
 
 @theme inline {
@@ -187,4 +209,41 @@ html {
 	line-clamp: 3;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+/* Fluid Typography Utilities */
+.text-fluid-xs {
+	font-size: var(--font-size-xs);
+}
+
+.text-fluid-sm {
+	font-size: var(--font-size-sm);
+}
+
+.text-fluid-base {
+	font-size: var(--font-size-base);
+}
+
+.text-fluid-lg {
+	font-size: var(--font-size-lg);
+}
+
+.text-fluid-xl {
+	font-size: var(--font-size-xl);
+}
+
+.text-fluid-2xl {
+	font-size: var(--font-size-2xl);
+}
+
+.text-fluid-3xl {
+	font-size: var(--font-size-3xl);
+}
+
+.text-fluid-4xl {
+	font-size: var(--font-size-4xl);
+}
+
+.text-fluid-5xl {
+	font-size: var(--font-size-5xl);
 }

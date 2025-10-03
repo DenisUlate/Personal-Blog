@@ -19,19 +19,19 @@ const sizeClasses = {
 	small: {
 		container: "p-4",
 		image: "h-32",
-		title: "text-lg",
+		title: "text-fluid-lg",
 		spacing: "space-y-2",
 	},
 	medium: {
 		container: "p-6",
 		image: "h-48",
-		title: "text-2xl",
+		title: "text-fluid-2xl",
 		spacing: "space-y-3",
 	},
 	large: {
 		container: "p-8",
 		image: "h-64",
-		title: "text-3xl",
+		title: "text-fluid-3xl",
 		spacing: "space-y-4",
 	},
 };
@@ -85,7 +85,6 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 						<h2 className={`text-foreground font-semibold hover:text-primary transition-colors ${currentSize.title}`}>
 							{post.title}
 						</h2>
-
 						{/* Category badge */}
 						{post.category && (
 							<div>
@@ -97,17 +96,13 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 								</Badge>
 							</div>
 						)}
-
 						{/* Date */}
 						<div className="flex items-center space-x-2 text-muted-foreground">
 							<Calendar size={16} />
-							<span>{formattedDate}</span>
+							<span className="text-fluid-sm">{formattedDate}</span>
 						</div>
-
 						{/* Excerpt */}
-						<p className="text-primary line-clamp-3">{post.excerpt}</p>
-
-						{/* Tags */}
+						<p className="text-primary line-clamp-3 text-fluid-base">{post.excerpt}</p> {/* Tags */}
 						<div className="flex gap-2 flex-wrap">
 							{visibleTags.map((tag, index) => (
 								<Badge variant="default" key={index} className="px-2 py-1 rounded-md text-sm">

@@ -52,13 +52,11 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 
 			return (
 				<div className="flex justify-between items-center mb-8">
-					{pageTitle && <h1 className="text-3xl font-bold text-primary">{pageTitle}</h1>}
+					{pageTitle && <h1 className="text-fluid-3xl font-bold text-primary">{pageTitle}</h1>}
 					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-xs" />}
 				</div>
 			);
-		}, [pageTitle, showSearchBar, onSearch]);
-
-		// Memoize sidebar content to avoid recreation
+		}, [pageTitle, showSearchBar, onSearch]); // Memoize sidebar content to avoid recreation
 		const sidebarContent = useMemo(() => {
 			if (!showSidebar) return null;
 

@@ -45,7 +45,7 @@ const FeaturedBlogSection: React.FC<FeaturedBlogSectionProps> = React.memo(
 
 		return (
 			<section className="mb-12">
-				<h2 className="text-3xl font-bold text-foreground mb-8">{title}</h2>
+				<h2 className="text-fluid-3xl font-bold text-foreground mb-8">{title}</h2>
 
 				<div className="grid gap-8">
 					{isLoading ? (
