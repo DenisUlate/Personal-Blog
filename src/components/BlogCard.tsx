@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { Badge } from "./ui/badge";
-import { Calendar, Folder } from "lucide-react";
+import { Calendar, Folder, TagIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/types/blog";
@@ -60,7 +60,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 
 		return (
 			<div
-				className={`border-none border-border rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out ${
+				className={`border border-border rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out ${
 					currentSize.container
 				} ${imagePosition !== "top" ? "flex flex-col md:flex-row" : ""}`}>
 				<Link
@@ -108,20 +108,21 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 							</div>
 						)}
 						{/* Date */}
-						<div className="flex items-center space-x-2 text-muted-foreground">
-							<Calendar size={16} />
-							<span className="text-fluid-sm">{formattedDate}</span>
+						<div className="flex items-center gap-2 text-muted-foreground">
+							<Calendar size={16} className="flex-shrink-0" />
+							<span className="text-fluid-xs leading-none">{formattedDate}</span>
 						</div>
 						{/* Excerpt */}
-						<p className="text-primary line-clamp-3 text-fluid-base">{post.excerpt}</p> {/* Tags */}
+						<p className="text-primary line-clamp-3 text-fluid-sm">{post.excerpt}</p>
+						{/* Tags */}
 						<div className="flex gap-2 flex-wrap">
 							{visibleTags.map((tag, index) => (
-								<Badge variant="default" key={index} className="px-2 py-1 rounded-md text-sm">
-									#{tag}
+								<Badge variant="default" key={index} className="px-2 py-1 rounded-md text-fluid-xs text-primary">
+									<TagIcon /> {tag}
 								</Badge>
 							))}
 							{hasMoreTags && (
-								<Badge variant="outline" className="px-2 py-1 rounded-md text-sm">
+								<Badge variant="default" className="px-2 py-1 rounded-md text-sm">
 									+{remainingTagsCount} more
 								</Badge>
 							)}
