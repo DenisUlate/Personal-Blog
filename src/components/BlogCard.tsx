@@ -60,15 +60,26 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 
 		return (
 			<div
-				className={`border-none border-border rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out ${currentSize.container}`}>
-				<Link href={`/blog/${post.id}`} className={`block ${imagePosition !== "top" ? "flex gap-6" : ""}`}>
+				className={`border-none border-border rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out ${
+					currentSize.container
+				} ${imagePosition !== "top" ? "flex flex-col md:flex-row" : ""}`}>
+				<Link
+					href={`/blog/${post.id}`}
+					className={`block ${imagePosition !== "top" ? "flex flex-col md:flex-row gap-4 md:gap-6 w-full" : ""}`}>
 					{/* Image container */}
 					{showImage && post.illustration && (
 						<div
 							className={`
 						relative w-full rounded-lg overflow-hidden bg-muted border border-border
-						${imagePosition === "top" ? `${currentSize.image} mb-4` : `${currentSize.image} flex-shrink-0`}
-						${imagePosition === "left" || imagePosition === "right" ? "w-1/3" : ""}
+						${imagePosition === "top" ? `${currentSize.image} mb-4` : `h-48 md:h-auto md:self-stretch flex-shrink-0`}
+						${
+							imagePosition === "left" || imagePosition === "right"
+								? size === "medium"
+									? "md:w-2/5 md:min-w-[280px]"
+									: "md:w-1/3"
+								: ""
+						}
+						${imagePosition === "right" ? "md:order-2" : ""}
 					`}>
 							<Image
 								src={post.illustration}

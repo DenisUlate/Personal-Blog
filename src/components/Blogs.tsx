@@ -67,7 +67,7 @@ const Blogs: React.FC = () => {
 	if (isLoading) {
 		return (
 			<MainLayout pageTitle="Blog Posts" showSearchBar={true} onSearch={handleSearch}>
-				<BlogListSkeleton count={postsPerPage} showImage={true} imagePosition="top" size="medium" />
+				<BlogListSkeleton count={postsPerPage} showImage={true} imagePosition="left" size="medium" />
 			</MainLayout>
 		);
 	}
@@ -79,7 +79,7 @@ const Blogs: React.FC = () => {
 	return (
 		<MainLayout pageTitle="Blog Posts" showSearchBar={true} onSearch={handleSearch}>
 			{/* Posts */}
-			<div className="space-y-8">
+			<div className="space-y-6">
 				{currentPosts.length === 0 && searchTerm ? (
 					<div className="text-center py-12">
 						<p className="text-xl text-primary mb-2">No posts found</p>
@@ -87,7 +87,7 @@ const Blogs: React.FC = () => {
 					</div>
 				) : (
 					currentPosts.map((post) => (
-						<BlogCard key={post.id} post={post} showImage={true} imagePosition="top" size="medium" />
+						<BlogCard key={post.id} post={post} showImage={true} imagePosition="left" size="medium" />
 					))
 				)}
 			</div>
