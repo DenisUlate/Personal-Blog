@@ -30,8 +30,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files (proteger archivos con datos sensibles)
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IMPORTANTE: .env.example SÍ debe estar en el repositorio para documentación
+# No agregar !.env.example aquí porque no está ignorado específicamente
 
 # vercel
 .vercel

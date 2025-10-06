@@ -9,6 +9,7 @@ import MarkdownContent from "@/components/MarkdownContent";
 import { BlogPost } from "@/types/blog";
 import GoToTopButton from "@/components/GoToTopButton";
 import BlogPostSkeleton from "@/components/BlogPostSkeleton";
+import BlogPostJsonLd from "@/components/BlogPostJsonLd";
 
 export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = use(params);
@@ -63,6 +64,9 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 
 	return (
 		<MainLayout showSidebar={false}>
+			{/* JSON-LD para SEO */}
+			<BlogPostJsonLd post={post} />
+
 			<Link href="/" className="flex items-center gap-2 text-primary hover:text-foreground mb-6">
 				<ArrowLeft size={16} className="text-primary" />
 				<span>Back to all posts</span>

@@ -25,5 +25,5 @@ export const METADATA = {
 	DESCRIPTION: "Un blog personal sobre tecnología, desarrollo web y más",
 	KEYWORDS: "blog, tecnología, desarrollo, Next.js, React",
 	AUTHOR: "Tu Nombre",
-	URL: "https://tu-dominio.com",
+	URL: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 } as const;
