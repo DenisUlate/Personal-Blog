@@ -25,13 +25,13 @@ const sizeClasses = {
 	medium: {
 		container: "p-6",
 		image: "h-48",
-		title: "text-fluid-2xl",
+		title: "text-fluid-xl",
 		spacing: "space-y-3",
 	},
 	large: {
 		container: "p-8",
 		image: "h-64",
-		title: "text-fluid-3xl",
+		title: "text-fluid-2xl",
 		spacing: "space-y-4",
 	},
 };
@@ -60,7 +60,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 
 		return (
 			<div
-				className={`border border-border rounded-lg shadow-sm bg-card hover:bg-muted duration-500 ease-in-out ${
+				className={`border border-border rounded-lg shadow bg-card hover:bg-muted duration-500 ease-in-out ${
 					currentSize.container
 				} ${imagePosition !== "top" ? "flex flex-col md:flex-row" : ""}`}>
 				<Link
