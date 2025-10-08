@@ -67,19 +67,19 @@ const Page = () => {
 						<Card
 							onMouseEnter={() => setHoveredCategory(category.slug)}
 							onMouseLeave={() => setHoveredCategory(null)}
-							className="bg-neutral-900 border-neutral-800 hover:border-neutral-700 transition-all duration-300 hover:shadow-lg hover:neutral-950/20 group cursor-pointer">
+							className="bg-card border-border hover:border-primary transition-all duration-300 hover:shadow-lg group cursor-pointer">
 							<CardHeader className="pb-3">
 								<div className="flex items-center justify-between">
 									<div className="flex items-center space-x-3">
 										<div className={`p-2 rounded-lg ${getColorClasses(category.color)}`}>
 											<Folder className="w-5 h-5" />
 										</div>
-										<CardTitle className="text-neutral-200 text-xl group-hover:text-blue-400 transition-colors">
+										<CardTitle className="text-primary text-xl group-hover:text-blue-400 transition-colors">
 											{category.name}
 										</CardTitle>
 									</div>
 									<ChevronRight
-										className={`h-5 w-5 text-neutral-500 group-hover:text-blue-400 transition-all ${
+										className={`h-5 w-5 text-primary group-hover:text-blue-400 transition-all ${
 											hoveredCategory === category.slug ? "translate-x-1" : ""
 										}`}
 									/>
@@ -87,8 +87,8 @@ const Page = () => {
 							</CardHeader>
 							<CardContent>
 								<div className="flex items-center justify-between">
-									<span className="text-neutral-400 text-sm">{formatPostCount(category.postCount)}</span>
-									<div className="h-2 w-16 bg-neutral-800 rounded-full overflow-hidden">
+									<span className="text-muted-foreground text-sm">{formatPostCount(category.postCount)}</span>
+									<div className="h-2 w-16 bg-secondary rounded-full overflow-hidden">
 										<div
 											className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
 											style={{ width: `${calculateProgressPercentage(category.postCount)}%` }}
@@ -102,24 +102,24 @@ const Page = () => {
 			</div>
 
 			{/* General statistics */}
-			<div className="mt-12 p-6 bg-neutral-900 rounded-lg border border-neutral-800">
-				<h2 className="text-xl font-semibold text-neutral-200 mb-4">Overview</h2>
+			<div className="mt-12 p-6 bg-card rounded-lg border border-border shadow">
+				<h2 className="text-xl font-semibold text-primary mb-4">Overview</h2>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="text-center">
 						<div className="text-2xl font-bold text-blue-400">{categories.length}</div>
-						<div className="text-neutral-400 text-sm">Categories</div>
+						<div className="text-muted-foreground text-sm">Categories</div>
 					</div>
 					<div className="text-center">
 						<div className="text-2xl font-bold text-green-400">
 							{categories.reduce((total, cat) => total + cat.postCount, 0)}
 						</div>
-						<div className="text-neutral-400 text-sm">Total Articles</div>
+						<div className="text-muted-foreground text-sm">Total Articles</div>
 					</div>
 					<div className="text-center">
 						<div className="text-2xl font-bold text-purple-400">
 							{Math.round(categories.reduce((total, cat) => total + cat.postCount, 0) / categories.length)}
 						</div>
-						<div className="text-neutral-400 text-sm">Average per Category</div>
+						<div className="text-muted-foreground text-sm">Average per Category</div>
 					</div>
 				</div>
 			</div>

@@ -1,7 +1,8 @@
 import { Tags, Home, LayoutGrid, Archive, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import logoImage from "../../../public/assets/logo_dark.png";
+import logoLightImage from "../../../public/assets/logo_light.png";
+import logoDarkImage from "../../../public/assets/logo_dark.png";
 
 import {
 	Sidebar,
@@ -53,12 +54,17 @@ export function AppSidebar() {
 					<div className="space-y-4 pl-2 ">
 						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-md">
 							<Link href="/">
+								{/* Logo para modo claro */}
 								<Image
-									src={logoImage}
+									src={logoLightImage}
 									alt="Logo"
-									// width={50}
-									// height={50}
-									className="w-[125px] h-[125px] overflow-hidden hover:scale-120 transform transition-transform duration-300 ease-in-out"
+									className="w-[125px] h-[125px] overflow-hidden hover:scale-120 transform transition-transform duration-300 ease-in-out opacity-70 dark:hidden"
+								/>
+								{/* Logo para modo oscuro */}
+								<Image
+									src={logoDarkImage}
+									alt="Logo"
+									className="w-[125px] h-[125px] overflow-hidden hover:scale-120 transform transition-transform duration-300 ease-in-out hidden dark:block"
 								/>
 							</Link>
 						</div>
