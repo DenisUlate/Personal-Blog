@@ -1,20 +1,9 @@
-import Image from "next/image";
 import MainLayout from "@/components/layout/MainLayout";
 
 export default function AboutPage() {
 	return (
 		<MainLayout showSidebar={false} pageTitle="About Me">
 			<div className="max-w-[800px] flex flex-col md:flex-row gap-8">
-				<div className="max-w-md">
-					<Image
-						src="/assets/logo_3_optimized.png"
-						alt="Profile"
-						width={300}
-						height={300}
-						className="rounded-lg shadow-md border border-border"
-					/>
-				</div>
-
 				<div className="prose dark:prose-invert max-w-2xl text-muted-foreground">
 					<p className="text-lg">Welcome to my personal blog! I&apos;m Denis, a passionate developer.</p>
 
