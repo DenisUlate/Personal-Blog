@@ -12,15 +12,15 @@ export default function AboutPage() {
 						other topics I&apos;m passionate about.
 					</p>
 
-					<h2 className="text-2xl text-primary font-semibold mt-6 mb-3">About This Space</h2>
+					<h2 className="text-2xl text-primary font-semibold mt-6 mb-4">About This Space</h2>
 					<p className="">
 						This space focuses on practical tech topics and problem-solving. I keep the emphasis on the work rather than
 						personal details, so you&apos;ll mostly find concise notes, tutorials, and ideas that might help in your
 						projects.
 					</p>
 
-					<h2 className="text-2xl text-primary font-semibold mt-6 mb-3">Skills & Interests</h2>
-					<ul className="list-disc pl-5 space-y-2">
+					<h2 className="text-2xl text-primary font-semibold mt-6 mb-4">Skills & Interests</h2>
+					<ul className="list-disc pl-6 space-y-2">
 						<li>Web Development</li>
 						<li>User Interface Design</li>
 						<li>Technical Writing</li>

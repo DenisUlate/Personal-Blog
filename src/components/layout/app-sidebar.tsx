@@ -48,7 +48,7 @@ const items = [
 
 export function AppSidebar() {
 	return (
-		<Sidebar className="bg-sidebar py-7 px-8 border-r-primary">
+		<Sidebar className="bg-sidebar py-8 px-8 border-r-primary">
 			<SidebarContent>
 				<SidebarGroup>
 					<div className="space-y-4 pl-2 ">
