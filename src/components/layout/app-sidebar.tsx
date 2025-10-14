@@ -58,12 +58,14 @@ export function AppSidebar() {
 								<Image
 									src={logoLightImage}
 									alt="Logo"
+									priority
 									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out opacity-70 dark:hidden"
 								/>
 								{/* Logo para modo oscuro */}
 								<Image
 									src={logoDarkImage}
 									alt="Logo"
+									priority
 									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out hidden dark:block"
 								/>
 							</Link>

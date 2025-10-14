@@ -100,7 +100,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${oxanium.variable} ${sourceCodePro.variable} dark`}>
+		<html lang="en" className={`${oxanium.variable} ${sourceCodePro.variable}`} suppressHydrationWarning>
 			<body>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<SidebarProvider>

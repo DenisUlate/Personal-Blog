@@ -13,6 +13,7 @@ interface BlogCardProps {
 	showImage?: boolean;
 	imagePosition?: "top" | "left" | "right";
 	size?: "small" | "medium" | "large";
+	priority?: boolean;
 }
 
 // Move sizeClasses outside component to avoid recreation
@@ -38,7 +39,7 @@ const sizeClasses = {
 };
 
 const BlogCard: React.FC<BlogCardProps> = React.memo(
-	({ post, showImage = true, imagePosition = "top", size = "medium" }) => {
+	({ post, showImage = true, imagePosition = "top", size = "medium", priority = false }) => {
 		const currentSize = sizeClasses[size];
 
 		// Memoize formatted date to avoid recalculation
@@ -76,6 +77,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 								src={post.illustration}
 								alt={post.title}
 								fill
+								priority={priority}
 								className="object-cover hover:scale-105 transition-transform duration-300"
 								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 							/>

@@ -47,6 +47,8 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 						onChange={handleInputChange}
 						placeholder={placeholder}
 						className="pl-10 pr-10 py-2 w-full bg-card border-border text-foreground placeholder:text-muted-foreground"
+						autoComplete="off"
+						data-form-type="other"
 					/>
 
 					{/* Botón para limpiar búsqueda */}

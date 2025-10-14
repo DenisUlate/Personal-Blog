@@ -86,8 +86,15 @@ const Blogs: React.FC = () => {
 						<p className="text-primary">Try searching with different keywords</p>
 					</div>
 				) : (
-					currentPosts.map((post) => (
-						<BlogCard key={post.id} post={post} showImage={true} imagePosition="left" size="medium" />
+					currentPosts.map((post, index) => (
+						<BlogCard
+							key={post.id}
+							post={post}
+							showImage={true}
+							imagePosition="left"
+							size="medium"
+							priority={index === 0 && currentPage === 1}
+						/>
 					))
 				)}
 			</div>
