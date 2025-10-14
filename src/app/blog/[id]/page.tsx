@@ -10,6 +10,7 @@ import { BlogPost } from "@/types/blog";
 import GoToTopButton from "@/components/GoToTopButton";
 import BlogPostSkeleton from "@/components/BlogPostSkeleton";
 import BlogPostJsonLd from "@/components/BlogPostJsonLd";
+import { formatDate } from "@/utils/helpers";
 
 export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = use(params);
@@ -39,16 +40,6 @@ export default function PostPage({ params }: { params: Promise<{ id: string }> }
 
 		fetchPost();
 	}, [id]);
-
-	// Function to format date
-	const formatDate = (dateString: string) => {
-		const date = new Date(dateString);
-		return date.toLocaleDateString("en-US", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		});
-	};
 
 	if (isLoading) {
 		return <BlogPostSkeleton />;

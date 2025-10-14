@@ -1,9 +1,10 @@
 /**
- * Formatea una fecha para mostrar en el blog
+ * Formatea una fecha en formato largo para mostrar en el blog
+ * @example "January 15, 2025"
  */
 export function formatDate(dateString: string): string {
 	const date = new Date(dateString);
-	return date.toLocaleDateString("es-ES", {
+	return date.toLocaleDateString("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -11,45 +12,19 @@ export function formatDate(dateString: string): string {
 }
 
 /**
- * Trunca un texto a un número específico de palabras
+ * Formatea una fecha en formato corto para mostrar en el blog
+ * @example "Jan 15, 2025"
  */
-export function truncateText(text: string, wordLimit: number): string {
-	const words = text.split(" ");
-	if (words.length <= wordLimit) return text;
-	return words.slice(0, wordLimit).join(" ") + "...";
-}
-
-/**
- * Genera un slug a partir de un título
- */
-export function generateSlug(title: string): string {
-	return title
-		.toLowerCase()
-		.replace(/[^a-z0-9\s-]/g, "")
-		.replace(/\s+/g, "-")
-		.replace(/-+/g, "-")
-		.trim();
-}
-
-/**
- * Valida si una URL es válida
- */
-export function isValidUrl(url: string): boolean {
-	try {
-		new URL(url);
-		return true;
-	} catch {
-		return false;
+export function formatDateShort(dateString: string): string {
+	const date = new Date(dateString);
+	if (isNaN(date.getTime())) {
+		return "Invalid Date";
 	}
-}
-
-/**
- * Calcula el tiempo de lectura estimado
- */
-export function calculateReadingTime(text: string): number {
-	const wordsPerMinute = 200;
-	const words = text.split(" ").length;
-	return Math.ceil(words / wordsPerMinute);
+	return date.toLocaleDateString("en-US", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
+	});
 }
 
 /**

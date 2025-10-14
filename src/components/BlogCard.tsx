@@ -6,6 +6,7 @@ import { Calendar, Folder, TagIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/types/blog";
+import { formatDate } from "@/utils/helpers";
 
 interface BlogCardProps {
 	post: BlogPost;
@@ -34,16 +35,6 @@ const sizeClasses = {
 		title: "text-fluid-2xl",
 		spacing: "space-y-4",
 	},
-};
-
-// Move formatDate outside component to avoid recreation
-const formatDate = (dateString: string) => {
-	const date = new Date(dateString);
-	return date.toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
 };
 
 const BlogCard: React.FC<BlogCardProps> = React.memo(
