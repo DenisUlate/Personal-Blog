@@ -1,5 +1,3 @@
-"use client";
-
 import { BlogPost } from "@/types/blog";
 
 interface BlogPostJsonLdProps {
@@ -42,7 +40,7 @@ export default function BlogPostJsonLd({ post }: BlogPostJsonLdProps) {
 			},
 		},
 		articleSection: post.category,
-		keywords: post.tags.join(", "),
+		keywords: post.tags?.join(", ") || "",
 		inLanguage: "es-ES", // Ajusta según tu idioma
 	};
 

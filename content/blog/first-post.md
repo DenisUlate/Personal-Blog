@@ -6,7 +6,7 @@ tags: ["javascript", "nextjs", "web-development"]
 category: "Frontend"
 excerpt: "Este es mi primer post del blog implementado con Markdown"
 featured: true
-illustration: "/images/blog/illustrations/fisrt-post-01-illustration.png"
+illustration: "/images/blog/illustrations/first-post-01-illustration.png"
 ---
 
 # Mi primer blog post

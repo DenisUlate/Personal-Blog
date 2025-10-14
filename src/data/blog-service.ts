@@ -31,9 +31,9 @@ export function getAllPosts(): BlogPost[] {
 				tags: data.tags || [],
 				category: data.category || "General",
 				featured: data.featured || false,
-				featuredImage: data.featuredImage || data.featured_image || null,
-				illustration: data.illustration || null,
-				images: data.images || [],
+				featuredImage: data.featuredImage ?? data.featured_image ?? null,
+				illustration: data.illustration ?? null,
+				images: Array.isArray(data.images) ? data.images : [],
 			} as BlogPost;
 		});
 
@@ -73,9 +73,9 @@ export function getPostBySlug(slug: string): BlogPost | null {
 			tags: data.tags || [],
 			category: data.category || "General",
 			featured: data.featured || false,
-			featuredImage: data.featuredImage || data.featured_image || null,
-			illustration: data.illustration || null,
-			images: data.images || [],
+			featuredImage: data.featuredImage ?? data.featured_image ?? null,
+			illustration: data.illustration ?? null,
+			images: Array.isArray(data.images) ? data.images : [],
 		} as BlogPost;
 	} catch (error) {
 		console.error("Error reading post:", error);

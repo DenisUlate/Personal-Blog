@@ -33,9 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 		// Memoize clear search handler
 		const clearSearch = useCallback(() => {
 			setSearchTerm("");
-			onSearch("");
-		}, [onSearch]);
-
+		}, []);
 		return (
 			<div className={`relative w-full max-w-md ${className}`}>
 				<div className="relative">
