@@ -51,7 +51,7 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 			if (!(pageTitle || showSearchBar)) return null;
 
 			return (
-				<div className="flex justify-between items-center mb-8">
+				<div className="flex flex-col md:flex-row justify-between items-center mb-8">
 					{pageTitle && <h1 className="text-fluid-3xl font-bold text-primary">{pageTitle}</h1>}
 					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-xs" />}
 				</div>
