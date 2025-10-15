@@ -111,11 +111,11 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 						<div className="flex gap-2 flex-wrap">
 							{visibleTags.map((tag) => (
 								<Badge variant="default" key={tag} className="px-2 py-1 rounded-md text-fluid-xs text-primary">
-									<TagIcon /> {tag}
+									<TagIcon size={16} /> {tag}
 								</Badge>
-							))}{" "}
+							))}
 							{hasMoreTags && (
-								<Badge variant="default" className="px-2 py-1 rounded-md text-sm">
+								<Badge variant="default" className="px-2 py-1 rounded-md text-fluid-xs">
 									+{remainingTagsCount} more
 								</Badge>
 							)}

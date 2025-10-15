@@ -78,7 +78,7 @@ export function AppSidebar() {
 									src={logoDarkImage}
 									alt="Logo"
 									priority
-									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out hidden dark:block"
+									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out opacity-70 hidden dark:block"
 								/>
 							</Link>
 						</div>

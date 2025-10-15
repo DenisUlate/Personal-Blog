@@ -56,7 +56,9 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 					{showSearchBar && onSearch && <SearchBar onSearch={onSearch} className="max-w-xs" />}
 				</div>
 			);
-		}, [pageTitle, showSearchBar, onSearch]); // Memoize sidebar content to avoid recreation
+		}, [pageTitle, showSearchBar, onSearch]);
+
+		// Memoize sidebar content to avoid recreation
 		const sidebarContent = useMemo(() => {
 			if (!showSidebar) return null;
 
@@ -70,7 +72,7 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 		}, [showSidebar, recentPosts, isLoadingPosts]);
 
 		if (!showSidebar) {
-			// Layout simple sin sidebar
+			// Simple layout without sidebar
 			return (
 				<div className={`max-w-7xl mx-auto p-8 ${className}`}>
 					{/* Header with title and optional search bar */}
@@ -81,7 +83,7 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 			);
 		}
 
-		// Layout con sidebar
+		// Layout with sidebar
 		return (
 			<div className={`max-w-7xl mx-auto p-8 ${className}`}>
 				{/* Header with title and optional search bar */}
