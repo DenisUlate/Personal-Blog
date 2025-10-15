@@ -1,3 +1,5 @@
+"use client";
+
 import { Tags, Home, LayoutGrid, Archive, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +14,7 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	useSidebar,
 } from "@/components/ui/sidebar";
 import SocialLinks from "../SocialLinks";
 import { Separator } from "../ui/separator";
@@ -47,13 +50,22 @@ const items = [
 ];
 
 export function AppSidebar() {
+	const { setOpenMobile, isMobile } = useSidebar();
+
+	const handleLinkClick = () => {
+		// Cierra el sidebar solo en móvil
+		if (isMobile) {
+			setOpenMobile(false);
+		}
+	};
+
 	return (
 		<Sidebar className="bg-sidebar py-8 px-8 border-r-primary">
 			<SidebarContent>
 				<SidebarGroup>
 					<div className="space-y-4 pl-2 ">
 						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-md">
-							<Link href="/">
+							<Link href="/" onClick={handleLinkClick}>
 								{/* Logo para modo claro */}
 								<Image
 									src={logoLightImage}
@@ -78,7 +90,7 @@ export function AppSidebar() {
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild className="hover:bg-accent transition-colors duration-300 ease-in-out">
-										<Link href={item.url} className="h-[40px] flex items-center">
+										<Link href={item.url} className="h-[40px] flex items-center" onClick={handleLinkClick}>
 											<item.icon />
 											<span className="uppercase font-semibold ml-2">{item.title}</span>
 										</Link>
