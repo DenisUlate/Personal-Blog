@@ -28,7 +28,7 @@ const RecentBlogs: React.FC<RecentBlogsProps> = React.memo(
 
 		return (
 			<div className="bg-transparent border-l border-border rounded-lg p-6 sticky top-4">
-				<h3 className="text-fluid-xl font-semibold text-foreground mb-4">Recent Posts</h3>
+				<h3 className="text-fluid-lg font-semibold text-foreground mb-4">Recent Posts</h3>
 				<div className="space-y-4">
 					{isLoading
 						? skeletonItems

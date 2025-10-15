@@ -21,19 +21,19 @@ const sizeClasses = {
 	small: {
 		container: "p-4",
 		image: "h-32",
-		title: "text-fluid-lg",
+		title: "text-fluid-sm",
 		spacing: "space-y-2",
 	},
 	medium: {
 		container: "p-6",
 		image: "h-48",
-		title: "text-fluid-xl",
+		title: "text-fluid-md",
 		spacing: "space-y-3",
 	},
 	large: {
 		container: "p-8",
 		image: "h-64",
-		title: "text-fluid-2xl",
+		title: "text-fluid-lg",
 		spacing: "space-y-4",
 	},
 };
@@ -94,9 +94,9 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 							<div>
 								<Badge
 									variant="default"
-									className="bg-transparent px-2 py-1 rounded-md text-[10px] uppercase tracking-wide inline-flex items-center justify-center gap-1.5 leading-none">
+									className="bg-transparent px-2 py-1 rounded-md text-fluid-xs uppercase tracking-wide inline-flex items-center justify-center gap-1.5 leading-none">
 									<Folder className="size-3" />
-									<span className="mt-px">{post.category}</span>
+									<span className="mt-px text-primary">{post.category}</span>
 								</Badge>
 							</div>
 						)}
