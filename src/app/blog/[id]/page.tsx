@@ -1,56 +1,56 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Folder } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, use } from "react";
+import { notFound } from "next/navigation";
 import MainLayout from "@/components/layout/MainLayout";
 import MarkdownContent from "@/components/MarkdownContent";
-import { BlogPost } from "@/types/blog";
 import GoToTopButton from "@/components/GoToTopButton";
-import BlogPostSkeleton from "@/components/BlogPostSkeleton";
 import BlogPostJsonLd from "@/components/BlogPostJsonLd";
 import { formatDate } from "@/utils/helpers";
+import { blogService } from "@/data/blog-service";
 
-export default function PostPage({ params }: { params: Promise<{ id: string }> }) {
-	const { id } = use(params);
-	const [post, setPost] = useState<BlogPost | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
-
-	useEffect(() => {
-		const fetchPost = async () => {
-			try {
-				setIsLoading(true);
-				const response = await fetch(`/api/posts/${id}`);
-
-				if (!response.ok) {
-					throw new Error("Post not found");
-				}
-
-				const postData = await response.json();
-				setPost(postData);
-			} catch (error) {
-				setError(error instanceof Error ? error.message : "An error occurred");
-				console.error("Error fetching post:", error);
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetchPost();
-	}, [id]);
-
-	if (isLoading) {
-		return <BlogPostSkeleton />;
-	}
-
-	if (error) {
-		return <div className="text-center p-8 text-2xl text-red-500">Error: {error}</div>;
-	}
+// Generar metadata dinámica para SEO
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
+	const post = blogService.getPostBySlug(id);
 
 	if (!post) {
-		return <div className="text-center p-8 text-2xl text-red-500">Post not found</div>;
+		return {
+			title: "Post not found",
+		};
+	}
+
+	return {
+		title: post.title,
+		description: post.excerpt,
+		openGraph: {
+			title: post.title,
+			description: post.excerpt,
+			type: "article",
+			publishedTime: post.date,
+			authors: [post.author],
+			tags: post.tags,
+		},
+	};
+}
+
+// Generar rutas estáticas en build time para mejor performance
+export async function generateStaticParams() {
+	const posts = blogService.getAllPosts();
+	return posts.map((post) => ({
+		id: post.slug,
+	}));
+}
+
+export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
+
+	// Server Component - datos obtenidos directamente en el servidor
+	const post = blogService.getPostBySlug(id);
+
+	// Si no existe el post, mostrar página 404
+	if (!post) {
+		notFound();
 	}
 
 	return (
