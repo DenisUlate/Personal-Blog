@@ -72,7 +72,7 @@ export default function CategoriesPage() {
 												<div className={`p-2 rounded-lg ${getColorClasses(category.color)}`}>
 													<Folder className="w-5 h-5" />
 												</div>
-												<CardTitle className="text-primary text-xl group-hover:text-blue-400 transition-colors">
+												<CardTitle className="text-primary text-fluid-sm group-hover:text-blue-400 transition-colors">
 													{category.name}
 												</CardTitle>
 											</div>
