@@ -47,6 +47,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 
 	// Server Component - datos obtenidos directamente en el servidor
 	const post = blogService.getPostBySlug(id);
+	const allPosts = blogService.getAllPosts();
 
 	// Si no existe el post, mostrar página 404
 	if (!post) {
@@ -54,7 +55,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 	}
 
 	return (
-		<MainLayout showSidebar={false}>
+		<MainLayout showSidebar={false} recentPosts={allPosts}>
 			{/* JSON-LD para SEO */}
 			<BlogPostJsonLd post={post} />
 

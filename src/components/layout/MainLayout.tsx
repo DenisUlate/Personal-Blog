@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useMemo } from "react";
 import { BlogPost } from "@/types/blog";
 import RecentBlogs from "@/components/RecentBlogs";
 import Footer from "@/components/Footer";
@@ -13,38 +13,13 @@ interface MainLayoutProps {
 	pageTitle?: string;
 	onSearch?: (searchTerm: string) => void;
 	className?: string;
+	recentPosts?: BlogPost[]; // Posts pasados desde Server Component
 }
 
 const MainLayout: React.FC<MainLayoutProps> = React.memo(
-	({ children, showSidebar = true, showSearchBar = false, pageTitle, onSearch, className = "" }) => {
-		const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
-		const [isLoadingPosts, setIsLoadingPosts] = useState(true);
-
-		// Memoize the fetch function to avoid recreation on every render
-		const fetchRecentPosts = useCallback(async () => {
-			try {
-				setIsLoadingPosts(true);
-				const response = await fetch("/api/posts");
-
-				if (!response.ok) {
-					throw new Error("Failed to fetch posts");
-				}
-
-				const data = await response.json();
-				// Get only the 5 most recent posts
-				setRecentPosts(data.posts.slice(0, 5));
-			} catch (error) {
-				console.error("Error fetching recent posts:", error);
-			} finally {
-				setIsLoadingPosts(false);
-			}
-		}, []);
-
-		useEffect(() => {
-			if (showSidebar) {
-				fetchRecentPosts();
-			}
-		}, [showSidebar, fetchRecentPosts]);
+	({ children, showSidebar = true, showSearchBar = false, pageTitle, onSearch, className = "", recentPosts = [] }) => {
+		// Ya no necesitamos fetch, los posts vienen como prop
+		const limitedRecentPosts = useMemo(() => recentPosts.slice(0, 5), [recentPosts]);
 
 		// Memoize header content to avoid recreation
 		const headerContent = useMemo(() => {
@@ -65,11 +40,11 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(
 			return (
 				<div className="w-full justify-items-end">
 					<div className="w-full lg:col-span-1 lg:max-w-xs">
-						<RecentBlogs posts={recentPosts} limit={5} isLoading={isLoadingPosts} />
+						<RecentBlogs posts={limitedRecentPosts} limit={5} isLoading={false} />
 					</div>
 				</div>
 			);
-		}, [showSidebar, recentPosts, isLoadingPosts]);
+		}, [showSidebar, limitedRecentPosts]);
 
 		if (!showSidebar) {
 			// Simple layout without sidebar

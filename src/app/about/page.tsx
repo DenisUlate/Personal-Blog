@@ -1,8 +1,11 @@
 import MainLayout from "@/components/layout/MainLayout";
+import { blogService } from "@/data/blog-service";
 
 export default function AboutPage() {
+	const allPosts = blogService.getAllPosts();
+
 	return (
-		<MainLayout showSidebar={false} pageTitle="About Me">
+		<MainLayout showSidebar={false} pageTitle="About Me" recentPosts={allPosts}>
 			<div className="max-w-[800px] flex flex-col md:flex-row gap-8">
 				<div className="prose dark:prose-invert max-w-2xl text-muted-foreground">
 					<p className="text-lg">Welcome to my personal blog! I&apos;m Denis, a passionate developer.</p>

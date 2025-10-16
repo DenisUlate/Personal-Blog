@@ -1,5 +1,5 @@
 import MainLayout from "@/components/layout/MainLayout";
-import { getAllPosts } from "@/data/blog-service";
+import { blogService } from "@/data/blog-service";
 import Link from "next/link";
 
 // Helper to format date parts
@@ -13,14 +13,14 @@ function getDateParts(dateString: string) {
 }
 
 export default function ArchivesPage() {
-	const posts = getAllPosts();
+	const posts = blogService.getAllPosts();
 
 	// Sort posts newest first
-	posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+	const sortedPosts = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 	// Group by year preserving order
-	const byYear: Record<string, typeof posts> = {};
-	for (const post of posts) {
+	const byYear: Record<string, typeof sortedPosts> = {};
+	for (const post of sortedPosts) {
 		const { year } = getDateParts(post.date);
 		const key = String(year);
 		if (!byYear[key]) byYear[key] = [];
@@ -30,7 +30,7 @@ export default function ArchivesPage() {
 	const orderedYears = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 
 	return (
-		<MainLayout pageTitle="Archives">
+		<MainLayout pageTitle="Archives" recentPosts={posts}>
 			<p className="text-muted-foreground mb-8">Browse all posts by publication date.</p>
 			<div className="space-y-14">
 				{orderedYears.map((year) => (

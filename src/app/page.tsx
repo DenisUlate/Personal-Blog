@@ -11,7 +11,7 @@ export default function Home() {
 	const postsToShow = featuredPosts.length > 0 ? featuredPosts.slice(0, 3) : allPosts.slice(0, 3);
 
 	return (
-		<MainLayout pageTitle="Welcome to My Blog">
+		<MainLayout pageTitle="Welcome to My Blog" recentPosts={allPosts}>
 			<div className="mb-8">
 				<h2 className="text-2xl font-bold mb-4">Recent Posts</h2>
 				<div className="space-y-6">

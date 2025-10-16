@@ -48,7 +48,7 @@ export default function CategoriesPage() {
 	};
 
 	return (
-		<MainLayout pageTitle="Categories">
+		<MainLayout pageTitle="Categories" recentPosts={allPosts}>
 			<div className="mb-8">
 				<p className="text-neutral-400 text-lg">
 					Explore the categories of our blog posts. Click on a category to view all related posts.

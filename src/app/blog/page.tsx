@@ -7,7 +7,7 @@ export default function BlogPage() {
 	const allPosts = blogService.getAllPosts();
 
 	return (
-		<MainLayout pageTitle="All Blog Posts" showSearchBar={false}>
+		<MainLayout pageTitle="All Blog Posts" showSearchBar={false} recentPosts={allPosts}>
 			<div className="space-y-6">
 				{allPosts.length === 0 ? (
 					<div className="text-center py-12">

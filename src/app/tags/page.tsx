@@ -23,7 +23,7 @@ export default function TagsPage() {
 	const sortedTags = tagsWithData.sort((a, b) => b.count - a.count);
 
 	return (
-		<MainLayout pageTitle="Tags">
+		<MainLayout pageTitle="Tags" recentPosts={allPosts}>
 			<p className="text-primary">Explore blog posts by tags.</p>
 
 			<div className="mt-8 space-y-4">
