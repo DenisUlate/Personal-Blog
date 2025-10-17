@@ -58,7 +58,9 @@ const Breadcrumbs = ({ separator = ">", className = "" }: BreadcrumbsProps) => {
 			: null;
 
 	return (
-		<nav aria-label="Breadcrumb" className={`flex items-center gap-2 text-sm text-muted-foreground ${className}`}>
+		<nav
+			aria-label="Breadcrumb"
+			className={`flex items-center mx-auto gap-2 text-sm text-muted-foreground max-w-7xl ${className}`}>
 			<ol className="flex flex-wrap items-center gap-2">
 				<li className="inline-flex items-center">
 					<Link href="/" className="text-primary hover:underline focus:outline-none focus:underline">
