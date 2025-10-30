@@ -8,7 +8,10 @@ Un blog personal moderno construido con Next.js 15, React 19, TypeScript y Tailw
 - 🌓 **Tema oscuro/claro** automático
 - 📱 **Responsive** para todos los dispositivos
 - ⚡ **Optimización de rendimiento** con Next.js 15
-- 🔍 **SEO optimizado** con metadatos dinámicos
+- 🔍 **SEO optimizado** con metadatos dinámicos, sitemap y RSS feed
+- 🤖 **robots.txt** configurado para motores de búsqueda
+- 🗺️ **Sitemap XML dinámico** generado automáticamente
+- 📡 **RSS Feed** para suscriptores
 - 🎯 **TypeScript** para mayor seguridad de tipos
 - 🚀 **App Router** de Next.js
 - 📊 **Paginación** inteligente
@@ -33,6 +36,8 @@ src/
 ├── app/                 # App Router de Next.js
 │   ├── layout.tsx       # Layout principal
 │   ├── page.tsx         # Página de inicio
+│   ├── sitemap.xml/     # Sitemap dinámico (SEO)
+│   ├── feed.xml/        # RSS feed dinámico
 │   └── [rutas]/         # Rutas dinámicas
 ├── components/          # Componentes reutilizables
 │   ├── ui/              # Componentes UI base
@@ -44,6 +49,19 @@ src/
 ├── styles/             # Estilos globales
 ├── types/              # Definiciones de tipos
 └── utils/              # Funciones auxiliares
+
+content/
+└── blog/               # Archivos Markdown/MDX de posts
+
+docs/
+├── SEO_IMPLEMENTATION.md    # Guía completa de SEO
+├── GUIA_RAPIDA_SEO.md      # Checklist de producción
+├── VERIFICACION_SEO.md     # Cómo probar SEO
+├── EJEMPLOS_CODIGO_SEO.md  # Componentes adicionales
+└── INDEX_SEO.md            # Índice de documentación SEO
+
+public/
+└── robots.txt          # Instrucciones para bots de búsqueda
 ```
 
 ## 🚀 Instalación y Uso
@@ -85,16 +103,40 @@ src/
 - `npm run build` - Construye para producción
 - `npm start` - Ejecuta la versión de producción
 - `npm run lint` - Ejecuta ESLint
+- `npm run new-post` - Crea un nuevo post de blog
+
+## 📖 Documentación SEO
+
+Este blog incluye optimización SEO completa. Consulta la documentación:
+
+- **[📚 Índice SEO](./docs/INDEX_SEO.md)** - Punto de entrada a toda la documentación
+- **[📋 Resumen](./RESUMEN_SEO.md)** - Vista general de lo implementado
+- **[⚡ Guía Rápida](./docs/GUIA_RAPIDA_SEO.md)** - Checklist antes de producción
+- **[🧪 Verificación](./docs/VERIFICACION_SEO.md)** - Cómo probar SEO
+- **[💻 Ejemplos de Código](./docs/EJEMPLOS_CODIGO_SEO.md)** - Componentes adicionales
+
+### Endpoints SEO Disponibles
+
+- `/robots.txt` - Instrucciones para bots
+- `/sitemap.xml` - Mapa del sitio (dinámico)
+- `/feed.xml` - RSS feed (dinámico)
 
 ## 🔧 Configuración
 
 ### Variables de Entorno
 
 ```env
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+# URL del sitio (IMPORTANTE para SEO)
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# En producción, usar tu dominio real:
+# NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
+
 NEXT_PUBLIC_APP_NAME="Mi Blog Personal"
 NEXT_PUBLIC_API_URL=https://dummyjson.com
 ```
+
+> ⚠️ **Importante:** Configura `NEXT_PUBLIC_SITE_URL` con tu dominio real antes de desplegar a producción para que sitemap.xml y feed.xml funcionen correctamente.
 
 ### Personalización
 
