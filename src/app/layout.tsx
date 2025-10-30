@@ -71,6 +71,12 @@ export const metadata: Metadata = {
 	authors: [{ name: METADATA.AUTHOR }],
 	creator: METADATA.AUTHOR,
 	metadataBase: new URL(METADATA.URL),
+	// Link alternativo al RSS feed - Permite que navegadores y lectores descubran tu feed
+	alternates: {
+		types: {
+			"application/rss+xml": `${METADATA.URL}/feed.xml`,
+		},
+	},
 	openGraph: {
 		title: METADATA.TITLE,
 		description: METADATA.DESCRIPTION,

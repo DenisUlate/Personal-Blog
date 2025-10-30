@@ -1,0 +1,17 @@
+# robots.txt - Controla el comportamiento de los bots de búsqueda
+# Este archivo indica a los crawlers qué páginas pueden o no indexar
+
+# Permitir a todos los bots rastrear todo el sitio
+User-agent: *
+Allow: /
+
+# Bloquear directorios privados o de administración (si los tuvieras)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Indicar la ubicación del sitemap XML
+# IMPORTANTE: Reemplaza 'https://tu-dominio.com' con tu URL real
+Sitemap: https://tu-dominio.com/sitemap.xml
+
+# Sitemap del RSS feed (opcional, para facilitar descubrimiento)
+Sitemap: https://tu-dominio.com/feed.xml
