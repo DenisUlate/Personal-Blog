@@ -44,6 +44,7 @@ author: "${author}"
 tags: [${tags}]
 excerpt: "${excerpt}"
 featured: ${featured}
+# updatedAt: "${date}" # Optional: Add this field and update the date when you modify the post
 ---
 
 # ${title}

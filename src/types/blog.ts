@@ -4,6 +4,7 @@ export interface BlogPost {
 	content: string;
 	excerpt: string;
 	date: string;
+	updatedAt?: string; // Optional: ISO date string when post was last modified
 	author: string;
 	tags: string[];
 	category?: string;
