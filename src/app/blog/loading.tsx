@@ -12,7 +12,9 @@ import { Skeleton } from "@/components/ui/skeleton";
  */
 export default function BlogLoading() {
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className="container mx-auto px-4 py-8" role="status" aria-label="Loading blog posts">
+			<span className="sr-only">Loading blog posts, please wait...</span>
+
 			{/* Header skeleton */}
 			<div className="mb-8">
 				<Skeleton className="h-10 w-48 mb-4" /> {/* Título */}
