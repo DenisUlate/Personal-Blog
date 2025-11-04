@@ -14,6 +14,9 @@ interface BlogPostJsonLdProps {
 export default function BlogPostJsonLd({ post }: BlogPostJsonLdProps) {
 	const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
+	if (process.env.NODE_ENV === "production" && !process.env.NEXT_PUBLIC_SITE_URL) {
+		console.error("NEXT_PUBLIC_SITE_URL is not set in production");
+	}
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "BlogPosting",
