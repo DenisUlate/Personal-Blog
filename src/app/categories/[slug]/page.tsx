@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import MainLayout from "@/components/layout/MainLayout";
 import BlogCard from "@/components/BlogCard";
 import { blogService } from "@/data/blog-service";
@@ -14,6 +15,32 @@ function slugToCategory(slug: string): string {
 		.split("-")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+	const slug = params.slug;
+	const categoryName = slugToCategory(slug);
+
+	// Fetch all posts (await if blogService.getAllPosts() returns a Promise)
+	const allPosts = await Promise.resolve(blogService.getAllPosts());
+
+	// Filter posts by category (case-insensitive)
+	const postsInCategory = allPosts.filter((post) => post.category?.toLowerCase() === categoryName.toLowerCase());
+
+	const count = postsInCategory.length;
+
+	// If no posts found, return "Category Not Found"
+	if (count === 0) {
+		return {
+			title: "Category Not Found",
+		};
+	}
+
+	// Otherwise, return category metadata
+	return {
+		title: `${categoryName} | Blog Categories`,
+		description: `Browse ${count} article${count === 1 ? "" : "s"} in ${categoryName}`,
+	};
 }
 
 export default function CategoryPage({ params }: CategoryPageProps) {
