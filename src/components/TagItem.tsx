@@ -5,7 +5,7 @@ import { formatDateShort } from "@/utils/helpers";
 interface TagProps {
 	name: string;
 	count?: number;
-	date: string;
+	date?: string;
 }
 
 const TagItem: React.FC<TagProps> = ({ name, count, date }) => {
@@ -16,7 +16,7 @@ const TagItem: React.FC<TagProps> = ({ name, count, date }) => {
 				{count && <span className="text-sm text-muted-foreground">{count}</span>}
 			</div>
 			<div className="flex-1 border-dotted border-b border-border mx-2 "></div>
-			<span className="text-sm text-muted-foreground">{formatDateShort(date)}</span>
+			<span className="text-sm text-muted-foreground">{date ? formatDateShort(date) : "No posts"}</span>
 		</div>
 	);
 };
