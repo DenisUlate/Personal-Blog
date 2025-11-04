@@ -44,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 		}, []);
 		return (
 			<div className={`relative w-full max-w-md ${className}`}>
-				<div className="relative" suppressHydrationWarning>
+				<div className="relative">
 					{/* Icono de búsqueda */}
 					<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={20} />
 					{/* Input de búsqueda */}
