@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { BlogPost } from "@/types/blog";
+import { compileMDX } from "@/lib/mdx";
 
 /**
  * BlogService - Servicio centralizado para gestión de posts del blog
@@ -139,6 +140,50 @@ class BlogService {
 	}
 
 	/**
+	 * Get post with compiled MDX content
+	 *
+	 * ¿Qué hace este método?
+	 * - Obtiene el post igual que getPostBySlug()
+	 * - ADEMÁS compila el contenido MDX usando next-mdx-remote/rsc
+	 * - Retorna el post + el contenido MDX ya renderizado
+	 *
+	 * ¿Cuándo usar este método?
+	 * - En páginas que necesitan renderizar contenido MDX
+	 * - Cuando quieres soporte para componentes React en el contenido
+	 *
+	 * ¿Por qué es async?
+	 * - compileMDX() es async porque el parsing puede tomar tiempo
+	 * - Se ejecuta en el servidor, no afecta al cliente
+	 *
+	 * @param slug - Post slug (filename without extension)
+	 * @returns Post data + compiled MDX content, or null if not found
+	 */
+	async getPostWithCompiledMDX(slug: string): Promise<{ post: BlogPost; mdxContent: React.ReactElement } | null> {
+		try {
+			// 1. Obtener el post usando el método existente
+			const post = this.getPostBySlug(slug);
+
+			if (!post) {
+				return null;
+			}
+
+			// 2. Compilar el contenido MDX
+			// post.content contiene el raw markdown/mdx
+			// compileMDX() lo compila y retorna el contenido renderizado
+			const mdxContent = await compileMDX(post.content);
+
+			// 3. Retornar ambos: post data + mdx renderizado
+			return {
+				post,
+				mdxContent,
+			};
+		} catch (error) {
+			console.error(`Error compiling MDX for post ${slug}:`, error);
+			return null;
+		}
+	}
+
+	/**
 	 * Parsea un archivo de post completo
 	 * @private
 	 */
@@ -194,3 +239,6 @@ export const getPostsByCategory = (category: string) => blogService.getPostsByCa
 export const getAllCategories = () => blogService.getAllCategories();
 export const getAllTags = () => blogService.getAllTags();
 export const searchPosts = (query: string) => blogService.searchPosts(query);
+
+// New method for MDX compilation
+export const getPostWithCompiledMDX = (slug: string) => blogService.getPostWithCompiledMDX(slug);

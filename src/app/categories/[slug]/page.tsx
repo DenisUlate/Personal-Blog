@@ -7,7 +7,7 @@ import { blogService } from "@/data/blog-service";
 import { Folder, ArrowLeft } from "lucide-react";
 
 interface CategoryPageProps {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }
 
 function slugToCategory(slug: string): string {
@@ -18,7 +18,7 @@ function slugToCategory(slug: string): string {
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-	const slug = params.slug;
+	const { slug } = await params;
 	const categoryName = slugToCategory(slug);
 
 	// Fetch all posts (await if blogService.getAllPosts() returns a Promise)
@@ -43,9 +43,12 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 	};
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
+	// Await params to get the slug
+	const { slug } = await params;
+
 	// Convert slug to category name
-	const categoryName = slugToCategory(params.slug);
+	const categoryName = slugToCategory(slug);
 	// Fetch posts for the given category
 	const allPosts = blogService.getAllPosts();
 	// Filter posts by category
