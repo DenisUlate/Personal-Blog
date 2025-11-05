@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+﻿﻿import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronRight, Folder } from "lucide-react";
 import MainLayout from "@/components/layout/MainLayout";
@@ -19,7 +19,14 @@ export default function CategoriesPage() {
 		return {
 			name: categoryName,
 			postCount: postsInCategory.length,
-			slug: categoryName.toLowerCase().replace(/\s+/g, "-"),
+			slug: categoryName
+				.toLowerCase()
+				.trim()
+				.normalize("NFD")
+				.replace(/[\u0300-\u036f]/g, "")
+				.replace(/[^a-z0-9\s-]/g, "")
+				.replace(/\s+/g, "-")
+				.replace(/-+/g, "-"),
 			color: getColorForCategory(categoryName),
 		};
 	});

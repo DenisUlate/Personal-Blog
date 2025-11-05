@@ -66,17 +66,17 @@ export function AppSidebar() {
 					<div className="space-y-4 pl-2 ">
 						<div className="border border-border bg-background flex items-center justify-center w-32 h-32 rounded-md">
 							<Link href="/" onClick={handleLinkClick}>
-								{/* Logo para modo claro */}
+								{/* Logo for light mode */}
 								<Image
 									src={logoLightImage}
-									alt="Logo"
+									alt="Denis Blog Logo"
 									priority
 									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out opacity-70 dark:hidden"
 								/>
-								{/* Logo para modo oscuro */}
+								{/* Logo for dark mode */}
 								<Image
 									src={logoDarkImage}
-									alt="Logo"
+									alt="Denis Blog Logo"
 									priority
 									className="w-[125px] h-[125px] overflow-hidden hover:scale-125 transform transition-transform duration-300 ease-in-out opacity-70 hidden dark:block"
 								/>

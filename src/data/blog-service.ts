@@ -167,6 +167,7 @@ class BlogService {
 			title: data.title || "Sin título",
 			excerpt: data.excerpt || "",
 			date: data.date || new Date().toISOString(),
+			updatedAt: data.updatedAt || data.updated_at || data.modifiedAt || data.modified_at || undefined,
 			author: data.author || "Anónimo",
 			tags: data.tags || [],
 			category: data.category || "General",

@@ -14,6 +14,9 @@ interface BlogPostJsonLdProps {
 export default function BlogPostJsonLd({ post }: BlogPostJsonLdProps) {
 	const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
+	if (process.env.NODE_ENV === "production" && !process.env.NEXT_PUBLIC_SITE_URL) {
+		console.error("NEXT_PUBLIC_SITE_URL is not set in production");
+	}
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "BlogPosting",
@@ -24,7 +27,8 @@ export default function BlogPostJsonLd({ post }: BlogPostJsonLdProps) {
 			name: post.author || "Autor del Blog",
 		},
 		datePublished: post.date,
-		dateModified: post.date, // Si tienes una fecha de modificación, úsala aquí
+		// Only include dateModified if the post has been updated
+		...(post.updatedAt && { dateModified: post.updatedAt }),
 		image: post.illustration ? `${siteUrl}${post.illustration}` : undefined,
 		url: `${siteUrl}/blog/${post.id}`,
 		mainEntityOfPage: {

@@ -15,7 +15,9 @@ export default function TagsPage() {
 		return {
 			name: tagName,
 			count: postsWithTag.length,
-			date: sortedPosts[0]?.date || new Date().toISOString(),
+			// Use the most recent post's date, or undefined if no posts exist
+			// Avoid using current date as fallback to prevent misleading "recent activity" indication
+			date: sortedPosts[0]?.date,
 		};
 	});
 

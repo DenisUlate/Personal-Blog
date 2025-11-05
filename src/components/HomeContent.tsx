@@ -15,7 +15,9 @@ export default function HomeContent({ allPosts, featuredPosts }: HomeContentProp
 	const [searchTerm, setSearchTerm] = useState("");
 
 	// Determinar posts iniciales (destacados o recientes)
-	const initialPosts = featuredPosts.length > 0 ? featuredPosts.slice(0, 3) : allPosts.slice(0, 3);
+	const initialPosts = useMemo(() => {
+		return featuredPosts.length > 0 ? featuredPosts.slice(0, 3) : allPosts.slice(0, 3);
+	}, [featuredPosts, allPosts]);
 
 	// Filtrar posts basado en el término de búsqueda
 	const filteredPosts = useMemo(() => {

@@ -19,6 +19,18 @@ import { blogService } from "@/data/blog-service";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tu-dominio.com";
 
 /**
+ * Escapa caracteres especiales XML para prevenir inyección XML
+ */
+function escapeXml(unsafe: string): string {
+	return unsafe
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&apos;");
+}
+
+/**
  * Genera una entrada XML para una URL específica
  */
 function generateUrlEntry(
@@ -29,10 +41,10 @@ function generateUrlEntry(
 ): string {
 	return `
   <url>
-    <loc>${url}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
+    <loc>${escapeXml(url)}</loc>
+    <lastmod>${escapeXml(lastmod)}</lastmod>
+    <changefreq>${escapeXml(String(changefreq))}</changefreq>
+    <priority>${escapeXml(String(priority))}</priority>
   </url>`;
 }
 

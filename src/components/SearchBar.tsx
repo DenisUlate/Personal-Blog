@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Search, X } from "lucide-react";
 import { Input } from "./ui/input";
 
@@ -14,16 +14,24 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 	({ onSearch, placeholder = "Search blog posts by title...", className = "" }) => {
 		const [searchTerm, setSearchTerm] = useState<string>("");
 
+		// Store the latest onSearch callback in a ref to avoid debounce resets
+		const onSearchRef = useRef(onSearch);
+
+		// Update ref with the latest onSearch callback
+		useEffect(() => {
+			onSearchRef.current = onSearch;
+		}, [onSearch]);
+
 		// Debounce effect para evitar búsquedas excesivas
 		useEffect(() => {
 			const debounceTimer = setTimeout(() => {
-				onSearch(searchTerm);
+				onSearchRef.current(searchTerm);
 			}, 300); // 300ms de delay
 
 			return () => {
 				clearTimeout(debounceTimer);
 			};
-		}, [searchTerm, onSearch]);
+		}, [searchTerm]);
 
 		// Memoize input change handler
 		const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 		}, []);
 		return (
 			<div className={`relative w-full max-w-md ${className}`}>
-				<div className="relative" suppressHydrationWarning>
+				<div className="relative">
 					{/* Icono de búsqueda */}
 					<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={20} />
 					{/* Input de búsqueda */}

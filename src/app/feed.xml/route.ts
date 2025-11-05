@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { blogService } from "@/data/blog-service";
+import { METADATA } from "@/constants";
 
 /**
  * RSS Feed Route Handler
@@ -16,13 +17,15 @@ import { blogService } from "@/data/blog-service";
  * Accesible en: /feed.xml
  */
 
-// IMPORTANTE: Configura estas variables con la información de tu blog
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tu-dominio.com";
-const SITE_TITLE = "Mi Blog Personal"; // Cambia por el nombre de tu blog
-const SITE_DESCRIPTION = "Blog sobre desarrollo web, programación y tecnología"; // Cambia por tu descripción
+// Import centralized metadata from constants
+const SITE_URL = METADATA.URL;
+const SITE_TITLE = METADATA.TITLE;
+const SITE_DESCRIPTION = METADATA.DESCRIPTION;
+const AUTHOR_NAME = METADATA.AUTHOR;
+
+// Additional metadata not yet centralized (TODO: consider adding to src/constants/index.ts)
 const SITE_LANGUAGE = "es-ES"; // Idioma del sitio (es-ES para español)
 const AUTHOR_EMAIL = "tu-email@ejemplo.com"; // Tu email (opcional)
-const AUTHOR_NAME = "Tu Nombre"; // Tu nombre
 
 /**
  * Escapa caracteres especiales XML para prevenir errores de parseo
