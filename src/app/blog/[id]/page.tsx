@@ -6,8 +6,8 @@ import MainLayout from "@/components/layout/MainLayout";
 import { MDXContent } from "@/components/MDXContent";
 import GoToTopButton from "@/components/GoToTopButton";
 import BlogPostJsonLd from "@/components/BlogPostJsonLd";
-import { formatDate } from "@/utils/helpers";
-import { blogService } from "@/data/blog-service";
+import { formatDate } from "@/lib/helpers";
+import { blogService } from "@/lib/blog-service";
 
 // Force dynamic rendering to avoid build-time prerendering errors
 export const dynamic = "force-dynamic";

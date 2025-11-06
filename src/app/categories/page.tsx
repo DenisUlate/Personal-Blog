@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronRight, Folder } from "lucide-react";
 import MainLayout from "@/components/layout/MainLayout";
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 
 function getColorForCategory(categoryName: string): string {
 	const colors = ["blue", "green", "red", "purple", "yellow", "indigo"];

@@ -1,4 +1,4 @@
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 import HomeContent from "@/components/HomeContent";
 
 export default function Home() {

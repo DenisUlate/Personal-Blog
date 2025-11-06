@@ -1,6 +1,6 @@
 "use client";
 
-import { getCurrentYear } from "@/utils/helpers";
+import { getCurrentYear } from "@/lib/helpers";
 
 const Footer = () => {
 	return (

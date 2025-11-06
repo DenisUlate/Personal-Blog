@@ -1,4 +1,4 @@
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 import BlogContent from "@/components/BlogContent";
 
 export default function BlogPage() {

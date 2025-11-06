@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 
 /**
  * Sitemap XML Route Handler

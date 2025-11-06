@@ -26,4 +26,6 @@ export const METADATA = {
 	KEYWORDS: "blog, tecnología, desarrollo, Next.js, React",
 	AUTHOR: "Tu Nombre",
 	URL: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+	LANGUAGE: "es-ES",
+	AUTHOR_EMAIL: "tu-email@ejemplo.com", // Optional: used in RSS feed
 } as const;

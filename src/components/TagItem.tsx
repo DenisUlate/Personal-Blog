@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "./ui/badge";
-import { formatDateShort } from "@/utils/helpers";
+import { formatDateShort } from "@/lib/helpers";
 
 interface TagProps {
 	name: string;

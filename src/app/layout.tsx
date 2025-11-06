@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
-import { METADATA } from "@/constants";
+import { METADATA } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { ThemeProvider } from "@/components/ThemeProvider";
 

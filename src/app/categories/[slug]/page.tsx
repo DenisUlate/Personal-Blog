@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import MainLayout from "@/components/layout/MainLayout";
 import BlogCard from "@/components/BlogCard";
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 import { Folder, ArrowLeft } from "lucide-react";
 
 interface CategoryPageProps {

@@ -6,7 +6,7 @@ import { Calendar, Folder, TagIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/types/blog";
-import { formatDate } from "@/utils/helpers";
+import { formatDate } from "@/lib/helpers";
 
 interface BlogCardProps {
 	post: BlogPost;

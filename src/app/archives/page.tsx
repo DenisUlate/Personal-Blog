@@ -1,5 +1,5 @@
 import MainLayout from "@/components/layout/MainLayout";
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 import Link from "next/link";
 
 // Helper to format date parts

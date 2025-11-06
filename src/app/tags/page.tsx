@@ -1,6 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import TagItem from "@/components/TagItem";
-import { blogService } from "@/data/blog-service";
+import { blogService } from "@/lib/blog-service";
 
 export default function TagsPage() {
 	// Server Component - datos reales del BlogService

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { blogService } from "@/data/blog-service";
-import { METADATA } from "@/constants";
+import { blogService } from "@/lib/blog-service";
+import { METADATA } from "@/lib/constants";
 
 /**
  * RSS Feed Route Handler
@@ -22,10 +22,8 @@ const SITE_URL = METADATA.URL;
 const SITE_TITLE = METADATA.TITLE;
 const SITE_DESCRIPTION = METADATA.DESCRIPTION;
 const AUTHOR_NAME = METADATA.AUTHOR;
-
-// Additional metadata not yet centralized (TODO: consider adding to src/constants/index.ts)
-const SITE_LANGUAGE = "es-ES"; // Idioma del sitio (es-ES para español)
-const AUTHOR_EMAIL = "tu-email@ejemplo.com"; // Tu email (opcional)
+const SITE_LANGUAGE = METADATA.LANGUAGE;
+const AUTHOR_EMAIL = METADATA.AUTHOR_EMAIL;
 
 /**
  * Escapa caracteres especiales XML para prevenir errores de parseo
