@@ -9,6 +9,9 @@ import BlogPostJsonLd from "@/components/BlogPostJsonLd";
 import { formatDate } from "@/utils/helpers";
 import { blogService } from "@/data/blog-service";
 
+// Force dynamic rendering to avoid build-time prerendering errors
+export const dynamic = "force-dynamic";
+
 // Generar metadata dinámica para SEO
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = await params;
