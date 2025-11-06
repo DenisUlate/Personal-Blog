@@ -158,7 +158,9 @@ class BlogService {
 	 * @param slug - Post slug (filename without extension)
 	 * @returns Post data + compiled MDX content, or null if not found
 	 */
-	async getPostWithCompiledMDX(slug: string): Promise<{ post: BlogPost; mdxContent: React.ReactElement } | null> {
+	async getPostWithCompiledMDX(
+		slug: string
+	): Promise<{ post: BlogPost; mdxSource: Awaited<ReturnType<typeof compileMDX>> } | null> {
 		try {
 			// 1. Obtener el post usando el método existente
 			const post = this.getPostBySlug(slug);
@@ -169,13 +171,13 @@ class BlogService {
 
 			// 2. Compilar el contenido MDX
 			// post.content contiene el raw markdown/mdx
-			// compileMDX() lo compila y retorna el contenido renderizado
-			const mdxContent = await compileMDX(post.content);
+			// compileMDX() serializa el MDX usando next-mdx-remote/serialize
+			const mdxSource = await compileMDX(post.content);
 
-			// 3. Retornar ambos: post data + mdx renderizado
+			// 3. Retornar ambos: post data + mdx serializado
 			return {
 				post,
-				mdxContent,
+				mdxSource,
 			};
 		} catch (error) {
 			console.error(`Error compiling MDX for post ${slug}:`, error);
