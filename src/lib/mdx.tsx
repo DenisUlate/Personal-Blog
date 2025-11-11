@@ -1,5 +1,6 @@
 import { serialize } from "next-mdx-remote/serialize";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+import rehypeShiki from '@shikijs/rehype';
 
 /**
  * Compile MDX content to serializable format
@@ -18,6 +19,18 @@ export async function compileMDX(source: string): Promise<MDXRemoteSerializeResu
 		mdxOptions: {
 			development: process.env.NODE_ENV === "development",
 			format: "mdx",
+			rehypePlugins: [
+				[
+					rehypeShiki,
+					{
+						themes: {
+							light: "github-light",
+							dark: "github-dark",
+						},
+						defaultColor: false, // Importante para temas dinámicos
+					},
+				],
+			],
 		},
 	});
 

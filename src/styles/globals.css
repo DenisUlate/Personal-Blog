@@ -247,3 +247,86 @@ html {
 .text-fluid-5xl {
 	font-size: var(--font-size-5xl);
 }
+
+/* ========================================= */
+/* SYNTAX HIGHLIGHTING STYLES - Shiki       */
+/* ========================================= */
+
+/* Basic code block styling */
+pre {
+	@apply rounded-lg border bg-muted/30 p-4 overflow-x-auto;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	tab-size: 2;
+}
+
+/* Reset code styling - clean base */
+code {
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	background: none;
+	padding: 0;
+	border: none;
+}
+
+/* Inline code styling - ONLY for code outside pre and .shiki blocks */
+:not(pre):not(.shiki) > code {
+	@apply bg-muted/50 px-1.5 py-0.5 rounded-md text-sm font-medium;
+}
+
+/* Code inside .shiki blocks - completely clean */
+.shiki code {
+	background: none !important;
+	padding: 0 !important;
+	border: none !important;
+	border-radius: 0 !important;
+	font-size: inherit;
+	color: inherit;
+}
+
+/* Shiki theme switching */
+html.light .shiki,
+html.light .shiki span {
+	color: var(--shiki-light) !important;
+	background-color: var(--shiki-light-bg) !important;
+	/* Optional: add other styling */
+	font-style: var(--shiki-light-font-style) !important;
+	font-weight: var(--shiki-light-font-weight) !important;
+	text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+	/* Optional: add other styling */
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Enhanced code block appearance */
+.shiki {
+	@apply rounded-lg;
+	padding: 1rem;
+	overflow-x: auto;
+	border: 1px solid hsl(var(--border));
+}
+
+/* Scrollbar styling for code blocks */
+.shiki::-webkit-scrollbar {
+	height: 8px;
+}
+
+.shiki::-webkit-scrollbar-track {
+	@apply bg-muted/30 rounded;
+}
+
+.shiki::-webkit-scrollbar-thumb {
+	@apply bg-muted-foreground/30 rounded;
+}
+
+.shiki::-webkit-scrollbar-thumb:hover {
+	@apply bg-muted-foreground/50;
+}
