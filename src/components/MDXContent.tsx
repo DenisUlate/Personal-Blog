@@ -4,7 +4,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Callout } from "@/components/mdx";
+import { Callout, CodeBlock } from "@/components/mdx";
 
 const components = {
 	Badge,
@@ -34,9 +34,7 @@ const components = {
 	code: (props: React.HTMLAttributes<HTMLElement>) => (
 		<code className="bg-muted px-2 py-0.5 rounded text-sm font-mono text-foreground border border-border" {...props} />
 	),
-	pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-		<pre className="bg-muted rounded-lg p-4 my-6 overflow-x-auto border border-border" {...props} />
-	),
+	pre: CodeBlock,
 };
 
 export function MDXContent({ mdxSource }: { mdxSource: MDXRemoteSerializeResult }) {

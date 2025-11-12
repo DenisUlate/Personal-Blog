@@ -15,8 +15,8 @@
  */
 
 export { Callout } from "./Callout";
+export { CodeBlock } from "./CodeBlock";
 
 // Aquí puedes añadir más exports en el futuro:
-// export { CodeBlock } from "./CodeBlock";
 // export { Tabs } from "./Tabs";
 // export { VideoEmbed } from "./VideoEmbed";
