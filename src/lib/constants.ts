@@ -20,6 +20,10 @@ export const ROUTES = {
 	ARCHIVES: "/archives",
 } as const;
 
+export const BLOG_CONFIG = {
+	POSTS_PER_PAGE: 6,
+} as const;
+
 export const METADATA = {
 	TITLE: "Mi Blog Personal",
 	DESCRIPTION: "Un blog personal sobre tecnología, desarrollo web y más",
