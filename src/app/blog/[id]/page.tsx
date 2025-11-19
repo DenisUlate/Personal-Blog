@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Folder } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import MainLayout from "@/components/layout/MainLayout";
 import { MDXContent } from "@/components/MDXContent";
@@ -92,6 +93,12 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 					<span className="text-primary ml-2">{formatDate(post.date)}</span>
 					<span className="text-muted-foreground">by {post.author}</span>
 				</div>
+
+				{post.illustration && (
+					<div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden border border-border">
+						<Image src={post.illustration} alt={post.title} fill className="object-cover" priority />
+					</div>
+				)}
 
 				<div className="mb-6">
 					<MDXContent mdxSource={mdxSource} />
