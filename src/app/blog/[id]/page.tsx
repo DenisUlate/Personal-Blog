@@ -64,7 +64,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 	const { post, mdxSource } = result;
 
 	return (
-		<MainLayout showSidebar={false} recentPosts={allPosts}>
+		<MainLayout showSidebar={true} recentPosts={allPosts}>
 			{/* JSON-LD para SEO */}
 			<BlogPostJsonLd post={post} />
 
@@ -73,7 +73,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 				<span>Back to all posts</span>
 			</Link>
 
-			<article className="bg-card border border-border p-8 rounded-lg shadow-lg">
+			<article className="bg-card border border-border rounded-lg shadow-lg p-8">
 				<h1 className="text-4xl font-bold text-foreground mb-4">{post.title}</h1>
 
 				{post.category && (
