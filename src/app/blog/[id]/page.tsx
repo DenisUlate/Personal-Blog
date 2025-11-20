@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar, Folder } from "lucide-react";
+import { ArrowLeft, Folder, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -74,25 +74,23 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 				<span>Back to all posts</span>
 			</Link>
 
-			<article className="bg-card border border-border rounded-lg shadow-lg p-8">
+			<article className="bg-card border border-border/20 rounded-lg shadow-lg p-8 mb-16">
 				<h1 className="text-4xl font-bold text-foreground mb-4">{post.title}</h1>
 
 				{post.category && (
-					<div className="mb-4">
+					<div className="mb-6 flex items-center justify-between">
 						<Badge
 							variant="default"
 							className="px-3 py-1 rounded-md text-[10px] uppercase tracking-wide inline-flex items-center justify-center gap-1.5 leading-none">
 							<Folder className="size-3" />
 							<span className="mt-px">{post.category}</span>
 						</Badge>
+
+						<div className="flex items-center space-x-2 text-primary">
+							<span className="text-primary ml-2 text-xs">{formatDate(post.date)}</span>
+						</div>
 					</div>
 				)}
-
-				<div className="flex items-center space-x-2 text-primary mb-6">
-					<Calendar size={16} className="text-primary" />
-					<span className="text-primary ml-2">{formatDate(post.date)}</span>
-					<span className="text-muted-foreground">by {post.author}</span>
-				</div>
 
 				{post.illustration && (
 					<div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden border border-border">
@@ -101,13 +99,19 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 				)}
 
 				<div className="mb-6">
+					<span className="text-muted-foreground text-sm">
+						<span className="text-accent">By</span> {post.author}
+					</span>
 					<MDXContent mdxSource={mdxSource} />
 				</div>
 
 				<div className="flex gap-2 pt-6 border-t border-border">
 					{post.tags.map((tag, index) => (
-						<Badge variant="default" key={index} className="bg-muted px-2 py-1 rounded-md text-sm">
-							#{tag}
+						<Badge variant="default" key={index} className="px-2 py-1 rounded-md text-sm">
+							<span>
+								<Tag size={12} className="mr-1" />
+							</span>
+							{tag}
 						</Badge>
 					))}
 				</div>
