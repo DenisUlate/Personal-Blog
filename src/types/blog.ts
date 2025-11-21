@@ -13,6 +13,7 @@ export interface BlogPost {
 	featuredImage?: string;
 	illustration?: string;
 	images?: string[];
+	readingTime: number; // in minutes
 }
 
 export interface BlogMetadata {

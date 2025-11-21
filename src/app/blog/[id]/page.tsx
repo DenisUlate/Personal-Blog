@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Folder, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Folder, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -99,9 +99,16 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
 				)}
 
 				<div className="mb-6">
-					<span className="text-muted-foreground text-sm">
-						<span className="text-accent">By</span> {post.author}
-					</span>
+					<div className="flex items-center justify-between">
+						<span className="text-muted-foreground text-sm">
+							<span className="text-accent">By</span> {post.author}
+						</span>
+						<div className="flex items-center gap-1 text-sm text-muted-foreground">
+							<Clock size={14} />
+							<span>{post.readingTime} min read</span>
+						</div>
+					</div>
+
 					<MDXContent mdxSource={mdxSource} />
 				</div>
 

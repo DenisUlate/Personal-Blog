@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { Badge } from "./ui/badge";
-import { Calendar, Folder, TagIcon } from "lucide-react";
+import { Calendar, Folder, TagIcon, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/types/blog";
@@ -101,9 +101,15 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
 							</div>
 						)}
 						{/* Date */}
-						<div className="flex items-center gap-2 text-muted-foreground">
-							<Calendar size={16} className="flex-shrink-0" />
-							<span className="text-fluid-xs leading-none">{formattedDate}</span>
+						<div className="flex items-center gap-4 text-muted-foreground text-fluid-xs">
+							<div className="flex items-center gap-1.5 leading-none">
+								<Calendar size={14} className="shrink-0" />
+								<span className="mt-px">{formattedDate}</span>
+							</div>
+							<div className="flex items-center gap-1.5 leading-none">
+								<Clock size={14} className="shrink-0" />
+								<span className="mt-px">{post.readingTime} min read</span>
+							</div>
 						</div>
 						{/* Excerpt */}
 						<p className="text-primary line-clamp-3 text-fluid-sm">{post.excerpt}</p>

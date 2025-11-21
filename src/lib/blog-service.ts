@@ -201,11 +201,27 @@ class BlogService {
 	}
 
 	/**
+	 * Calcula el tiempo de lectura en minutos
+	 * Estándar: 200 palabras por minuto
+	 */
+
+	private calculateReadingTime(content: string): number {
+		const wordsPerMinute = 200;
+		// Eliminar caracteres especiales y dividir por espacios para contar palabras
+		const words = content.trim().split(/\s+/).length;
+		const time = Math.ceil(words / wordsPerMinute);
+		return time;
+	}
+
+	/**
 	 * Parsea el contenido de un post desde string
 	 * @private
 	 */
 	private parsePostContent(fileContents: string, slug: string): BlogPost {
 		const { data, content } = matter(fileContents);
+
+		// Calculamos el tiempo de lectura basado en el contenido
+		const readingTime = this.calculateReadingTime(content);
 
 		return {
 			id: slug,
@@ -222,6 +238,7 @@ class BlogService {
 			featuredImage: data.featuredImage ?? data.featured_image ?? null,
 			illustration: data.illustration ?? null,
 			images: Array.isArray(data.images) ? data.images : [],
+			readingTime,
 		} as BlogPost;
 	}
 }
